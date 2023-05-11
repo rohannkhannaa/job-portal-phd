@@ -30,7 +30,7 @@ const mime = require("mime");
 const path = require("path");
 const DB_URL = process.env.MONGO_DB_URL ;
 const corsOptions ={
-  origin:'http://localhost:3000', 
+  origin:process.env.REACT_APP_API_KEY, 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
