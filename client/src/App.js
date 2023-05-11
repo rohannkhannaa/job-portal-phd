@@ -26,6 +26,7 @@ import NewInstitute from "./components/NewInstitute";
 import AddInstitute from "./components/AddInstitute";
 // import Download from "./components/download";
 import CustomizableForm from "./components/CustomForm/CustomizableForm";
+import axios from './components/axios';
 
 function Root() {
   const [data, setData] = useState(false);
@@ -55,8 +56,7 @@ function Root() {
       let token = localStorage.getItem("usersdatatoken");
 
       //console.log(token);
-
-      const res = await fetch("/validuser", {
+      const res = await fetch(`${process.env.REACT_APP_API_PROXY}/validuser`, {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -68,7 +68,7 @@ function Root() {
 
       console.log(data);
 
-      if (data.status == 401 || !data) {
+      if (data.status === 401 || data.message === "failed") {
         console.log("home page redirect");
         setUser({});
         setUserType("");
@@ -83,7 +83,7 @@ function Root() {
 
           if(data.userType==="admin") navigate("/admin");
 
-          //navigate("/profile");
+          // navigate("/profile");
       }
     }
 

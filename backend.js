@@ -658,26 +658,31 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 // user valid
 app.get("/validuser", authenticate, async (req, res) => {
-  //console.log("done");
+  console.log(req);
   try {
+    
     let ValidUserOne = await User.findOne({ _id: req.userId });
 
     if (ValidUserOne) {
-      res.status(201).json({ status: 201, ValidUserOne, userType: "student" });
+      res.status(201).json({ status: 201, message:"success", ValidUserOne, userType: "student" });
     }
-
-    if (!ValidUserOne) {
+    else if (!ValidUserOne) {
       ValidUserOne = await UserInstitute.findOne({ _id: req.userId });
       if (ValidUserOne) {
-        res.status(201).json({ status: 201, ValidUserOne, userType: "institute" });
+        res.status(201).json({ status: 201, message:"success", ValidUserOne, userType: "institute" });
+      }
+      else
+      {
+        ValidUserOne = await Admin.findOne({ _id: req.userId });
+      res.status(201).json({ status: 201, message:"success", ValidUserOne, userType: "admin" });
       }
     }
 
-    if (!ValidUserOne) {
-      ValidUserOne = await Admin.findOne({ _id: req.userId });
-      res.status(201).json({ status: 201, ValidUserOne, userType: "admin" });
+    if(!ValidUserOne) 
+    {
+      res.status(201).json({ status: 201, message:"failed", ValidUserOne, userType: "NA" });
     }
-
+    
 
 
     // if (!ValidUserOne) {
