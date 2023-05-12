@@ -82,8 +82,8 @@ function App({ user, type }) {
     const res = await fetch(`${process.env.REACT_APP_API_PROXY}/logout`, {
       method: "GET",
       headers: {
+        mode:'no-cors',
         "Content-Type": "application/json",
-        "access-control-allow-orgigin" : "*",
         "Authorization": token,
         Accept: "application/json"
       },
