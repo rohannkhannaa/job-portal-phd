@@ -95,7 +95,7 @@ function App({ user, type }) {
   
     console.log(data);
   
-    if (data.status == 201) {
+    if (data.status == 201 || data.message === 'success') {
       console.log("user logout");
       localStorage.removeItem("usersdatatoken");
       //setLoggedIn(false);
