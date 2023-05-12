@@ -52,7 +52,11 @@ function App({ user, type }) {
     let token = localStorage.getItem("usersdatatoken");
 
     console.log("inside logout");
-    // console.log(token); 
+    console.log(token); 
+    if(!token){
+      console.log("Token was not found !!");
+      return ;
+    }
 
     // axios.get("/logout", {
     //   headers: {
