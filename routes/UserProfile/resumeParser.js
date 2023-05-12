@@ -17,7 +17,7 @@ const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { createWorker } = require("tesseract.js");
-
+const PDFParserModule =  require("pdf2json");
 const route = express.Router();
 route.use(cors());
 route.use(
@@ -35,7 +35,8 @@ route.post("/resume-upload/:id", upload.single("resume"), async (req, res) => {
     console.log(buffer);
     console.log(id);
     console.log("Yha1");
-    const PDFParserModule = await import("pdf2json");
+    // const PDFParserModule =  import("pdf2json");
+  
     console.log("Yha1");
     const PDFParser = PDFParserModule.default;
     console.log("Yha2");
