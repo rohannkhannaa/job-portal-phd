@@ -47,11 +47,13 @@ const history=useNavigate();
       console.log("did i come here");
       isFirstRender.current=false;
 
+      console.log("ID : "+id);
       if(id!==undefined){
         axios.get(`/updateJob/${id}`)
           .then((response)=>{
             if(response.data.status===200){
               const jobDetails=response.data.job;
+              console.log("JOB"+jobDetails);
               setTitle(jobDetails.title);
               setLocation(jobDetails.location);
               setSalary(jobDetails.salary);

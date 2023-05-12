@@ -12,7 +12,8 @@ function DetailsContainer2() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000 // set the time between each slide transition to 3 seconds (3000 milliseconds)
+    autoplaySpeed: 2000, // set the time between each slide transition to 3 seconds (3000 milliseconds)
+    arrows : false,
   };
 
   return (

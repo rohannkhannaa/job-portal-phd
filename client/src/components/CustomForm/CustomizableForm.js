@@ -140,6 +140,7 @@ function CustomizableForm({handleSubmit,updateForm}){
     }
 
   },[getData,personalData,academicData,experienceData,publicationData,porData,referenceData,updateFormAcademic,updateFormExperience,updateFormPersonal,updateFormPor,updateFormPublication,updateFormReference])
+  
   return(
     <>
     <h1>Hona chahiye</h1>
