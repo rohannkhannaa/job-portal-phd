@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import axios from "./axios"; 
 import lgimage from './lgimage.jpg';
 
-const ForgotPassword = () => {
+const ForgotPassword =   () => {
 
     const { id, token , usertype } = useParams();
 

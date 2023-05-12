@@ -189,7 +189,7 @@ const Login = () => {
                         <div class="mt-4">
                             <div class="flex justify-between">
                                 <label class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" for="loggingPassword">Password</label>
-                                <a onClick={handlePassword} class="text-xs text-gray-500 dark:text-gray-300 hover:underline">Forget Password?</a>
+                                {/* <a onClick={handlePassword} class="text-xs text-gray-500 dark:text-gray-300 hover:underline">Forget Password?</a> */}
                             </div>
 
                             <input
