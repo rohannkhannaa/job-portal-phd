@@ -55,6 +55,7 @@ function App({ user, type }) {
 
     const res = await axios.get("/logout", {
       headers: {
+        "Allow-Control-Allow-Origin" : "*",
         "Content-Type": "application/json",
         "Authorization": token,
         "Accept": "application/json"
