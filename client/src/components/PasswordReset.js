@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import axios from "./axios";
 import './css/Signup.css';
 import lgimage from './lgimage.jpg';
 

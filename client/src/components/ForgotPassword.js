@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 // import Box from '@mui/material/Box';
 // import CircularProgress from '@mui/material/CircularProgress';
 import { useLocation } from "react-router-dom";
-import axios from "axios"; 
+import axios from "./axios"; 
 import lgimage from './lgimage.jpg';
 
 const ForgotPassword = () => {
