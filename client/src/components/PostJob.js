@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useState, useEffect, useRef} from "react";
-import axios from "axios";
+import axios from "./axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./css/PostJob.css";
