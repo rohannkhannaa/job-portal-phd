@@ -58,8 +58,8 @@ function App({ user, type }) {
         "Content-Type": "application/json",
         "Authorization": token,
         "Accept": "application/json"
-      },
-      withCredentials: true
+      },  
+      withCredentials: false
     }).then((response)=>{
       console.log("after logout");
 
