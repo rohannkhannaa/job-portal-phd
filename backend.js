@@ -770,7 +770,7 @@ app.post("/api/sendpasswordlink", async (req, res) => {
           from: "r.patidar181001.2@gmail.com",
           to: email,
           subject: "Sending Email For password Reset",
-          text: `This Link Valid For 2 MINUTES http://localhost:3000/forgotpassword/${userfind.id}/${setusertoken.verifytoken}/${userType}`,
+          text: `This Link Valid For 2 MINUTES ${process.env.REACT_APP_API_KEY}/forgotpassword/${userfind.id}/${setusertoken.verifytoken}/${userType}`,
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -801,7 +801,7 @@ app.post("/api/sendpasswordlink", async (req, res) => {
           from: "r.patidar181001.2@gmail.com",
           to: email,
           subject: "Sending Email For password Reset",
-          text: `This Link Valid For 2 MINUTES http://localhost:3000/forgotpassword/${userfind.id}/${setusertoken.verifytoken}/${userType}`,
+          text: `This Link Valid For 2 MINUTES ${process.env.REACT_APP_API_KEY}/forgotpassword/${userfind.id}/${setusertoken.verifytoken}/${userType}`,
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
