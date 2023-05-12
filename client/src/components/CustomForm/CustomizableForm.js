@@ -16,6 +16,7 @@ import CustomFormExperience from "./CustomFormExperience";
 import CustomFormPor from "./CustomFormPor";
 import CustomFormPublication from "./CustomFormPublication";
 import CustomFormReference from "./CustomFormReference";
+import { log } from "util";
 
 function CustomizableForm({handleSubmit,updateForm}){
 
@@ -119,9 +120,11 @@ function CustomizableForm({handleSubmit,updateForm}){
     console.log("reference" + updateFormReferenceLength);
 
     if(updateFormPersonalLength!==0 && updateFormPublicationLength!==0 && updateFormPorLength!==0 && updateFormAcademicLength!==0 && updateFormExperienceLength!==0 && updateFormReferenceLength!==0){
+      console.log("pehla");
       setGotUpdateForm(true);
     }else{
       if(Object.keys(updateForm).length===0){
+        console.log("dusra");
         setGotUpdateForm(true);
       }
     }
