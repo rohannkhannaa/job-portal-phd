@@ -17,7 +17,7 @@ const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { createWorker } = require("tesseract.js");
-import PDFParserModule from "pdf2json";
+
 const route = express.Router();
 route.use(cors());
 route.use(
@@ -35,21 +35,20 @@ route.post("/resume-upload/:id", upload.single("resume"), async (req, res) => {
     console.log(buffer);
     console.log(id);
     console.log("Yha1");
-  
+    const PDFParserModule = await import("pdf2json");
     console.log("Yha1");
     const PDFParser = PDFParserModule.default;
     console.log("Yha2");
     const parser = new PDFParser();
-    console.log("Yha 3");
     parser.on("pdfParser_dataReady", async (pdfData) => {
       const text = pdfData.Pages[0].Texts.map((t) => t.R[0].T).join("\n");
-      console.log("yha4"+text);
+      // console.log(text);
       let class10Marks = null;
       let class12Marks = null;
       let class10Start = null;
       let class12Start = null;
       let class10Board = null;
-      let class12Board = null;      
+      let class12Board = null;
       const class10regex = /Secondary[\s\n]*CentralBoardofSecondaryEducation[\s\n]*(\d{1,3})%/i;
       const class12regex = /SeniorSecondary[\s\n]*CentralBoardofSecondaryEducation[\s\n]*(\d{1,2}.(\d)*)%/i;
       const class10startregex = /Secondary[\s\n]*CentralBoardofSecondaryEducation[\s\n]*(\d{1,2})%\d\d\n(\d{4})/i;
