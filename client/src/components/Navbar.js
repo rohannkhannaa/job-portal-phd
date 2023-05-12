@@ -83,6 +83,7 @@ function App({ user, type }) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "access-control-allow-orgigin" : "*",
         "Authorization": token,
         Accept: "application/json"
       },
