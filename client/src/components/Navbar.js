@@ -75,7 +75,7 @@ function App({ user, type }) {
     // }).catch((error) => {
     //   console.log(error);
     // });
-    const res = await fetch(`/logout`, {
+    const res = await fetch(`${process.env.REACT_APP_API_PROXY}/logout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
