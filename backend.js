@@ -116,7 +116,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post("/job-post", (req, res) => {
-  //console.log(req.body);
+  console.log("acha :");
+  console.log(req.body);
   const { job, id } = req.body;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
