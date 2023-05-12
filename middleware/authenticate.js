@@ -10,10 +10,11 @@ const Admin = models.Admin;
 
 const authenticate = async(req,res,next)=>{
 
+    console.log("authentication m aa rha");
     try {
         const token = req.headers.authorization;
+        console.log("authentication m aa rha 2");
 
-        console.log("authentication m aa rha");
         console.log(token);
         
         const verifytoken = jwt.verify(token,keysecret);

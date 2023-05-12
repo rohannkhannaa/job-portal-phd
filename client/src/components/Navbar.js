@@ -60,7 +60,9 @@ function App({ user, type }) {
         "Accept": "application/json"
       },
       withCredentials: true
-    });
+    }).catch(e => {
+      console.log(e);
+  });;
     console.log("after logout");
 
     const data = res.data;
