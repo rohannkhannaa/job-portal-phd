@@ -17,7 +17,7 @@ const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const { createWorker } = require("tesseract.js");
-const PDFParserModule =  import("pdf2json");
+import PDFParserModule from "pdf2json";
 const route = express.Router();
 route.use(cors());
 route.use(
