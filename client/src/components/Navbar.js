@@ -62,9 +62,8 @@ function App({ user, type }) {
       withCredentials: false
     }).then((response)=>{
       console.log("after logout");
-
       const data = response.data;
-  
+
       console.log(data);
   
       if (data.status == 201) {

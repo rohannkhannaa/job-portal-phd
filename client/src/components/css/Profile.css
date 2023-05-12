@@ -150,8 +150,8 @@ p {
   background-color: white !important;
   color : black !important;
 }
-.outer-container{
-  max-width : 17rem ;
-  text-align: center;
-  position : fixed ;
-} 
+@media (max-width: 767px) {
+  .outer-container {
+    position: static;
+  }
+}

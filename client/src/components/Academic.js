@@ -7,6 +7,21 @@ import { FaEdit, FaPen } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 export default function Profile({ user, type }) {
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [board10, setBoard10] = useState("");
   const [percentageFormat10, setPercentageFormat10] = useState("");
   const [percentage10, setPercentage10] = useState("");
@@ -207,18 +222,18 @@ export default function Profile({ user, type }) {
   return (
     <>
       <div className="userProfile">
-        <div className="parent" style={{ marginLeft: "2rem" }}>
+        <div className="parent" style={{ marginLeft: isMobile ? '0rem': "2rem" , paddingLeft : isMobile ? '0rem' : ''}}>
           <div className="left">
             <h3
               style={{ fontWeight: "400" }}
               className="text-xxlg leading-6 font-large text-gray-900"
-            >
+            > 
               Academic Details
             </h3>
           </div>
         </div>
         <hr
-          style={{ marginLeft: "2rem", borderWidth: "1px", width: "17rem" }}
+          style={{ marginLeft: isMobile ? '0rem':"2rem", borderWidth: "1px", width: "17rem" }}
         />
         {/* <div className="parent">
         </div> */}
@@ -227,7 +242,7 @@ export default function Profile({ user, type }) {
           <>
             {isedit1 ? (
               <>
-                <div style={{ width: "80%" }} className="flex my-10 mx-20">
+                <div style={{ width: "90%" }} className="flex my-10">
                   <div className="my-2 flex-1 bg-white shadow overflow-hidden sm:rounded-lg">
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -371,7 +386,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Masters of Technology
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft: isMobile ? '0rem':"1.5rem" }}></span>
                         <button
                           style={{
                             fontSize: "medium",
@@ -446,7 +461,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Bachelors of Technology
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft: isMobile ? '0rem': "1.5rem" }}></span>
                       </h3>
                     </div>
                     <div className="border-t border-gray-300">
@@ -586,7 +601,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Bachelors of Technology
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft:isMobile ? '0rem': "1.5rem" }}></span>
                         <button
                           style={{
                             fontSize: "medium",
@@ -661,7 +676,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Senior Secondary Education
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft:isMobile ? '0rem': "1.5rem" }}></span>
                       </h3>
                     </div>
                     <div className="border-t border-gray-300">
@@ -793,7 +808,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Senior Secondary Education
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft:isMobile ? '0rem': "1.5rem" }}></span>
                         <button
                           style={{
                             fontSize: "medium",
@@ -866,7 +881,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Secondary Education
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft: isMobile ? '0rem':"1.5rem" }}></span>
                       </h3>
                     </div>
                     <div className="border-t border-gray-300">
@@ -998,7 +1013,7 @@ export default function Profile({ user, type }) {
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Secondary Education
-                        <span style={{ marginLeft: "1.5rem" }}></span>
+                        <span style={{ marginLeft:isMobile ? '0rem': "1.5rem" }}></span>
                         <button
                           style={{
                             fontSize: "medium",

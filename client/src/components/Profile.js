@@ -30,7 +30,21 @@ import axios from "./axios";
 export default function Profile({ user, type }) {
   const [altProfile, setAltProfile] = useState(defaultImage)
   const [isHovered, setIsHovered] = useState(false);
-  
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [popUpImageForm, setPopUpImageForm] = useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -39,7 +53,6 @@ export default function Profile({ user, type }) {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-  const [screenWidth] = React.useState(window.innerWidth);
   const [activeComponent, setActiveComponent] = useState("personal");
   const [name, setName] = useState("");
   const history = useNavigate();
@@ -73,7 +86,8 @@ export default function Profile({ user, type }) {
       {/* {screenWidth >= 1024 ? ( */}
       <>
         {type === "student" ? (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: isMobile ? '' : "flex" }}>
+           
             <div className="outer-container">
               <aside class="flex flex-col w-200 h-screen px-7 py-2 bg-white   rtl:border-2 dark:bg-gray-100 dark:border-gray-200">
                 <div style={{marginLeft : '1rem'}}>
@@ -297,7 +311,8 @@ export default function Profile({ user, type }) {
                 </div>
               </aside>
             </div>
-            <div className="Profile" style={{ marginLeft: "15rem" }}>
+                    
+            <div className="Profile" style={{ marginLeft: isMobile ? '0rem' : "0.1rem" }}>
               <section
                 style={{ padding: "0", margin: "0" }}
                 className="renderComponent"

@@ -44,7 +44,6 @@ function PostedJobs({user,type}){
 
   const selectAllClicked = ()=>{
     setSelectAll(!selectAll);
-
   }
 
   const handleMultipleDelete = () =>{
