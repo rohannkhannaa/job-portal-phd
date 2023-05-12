@@ -909,9 +909,9 @@ app.get("/logout", authenticate, async (req, res) => {
     console.log("save ho rha");
     // console.log(rootUser);
 
-    res.status(201).json({ status: 201 });
+    res.status(201).json({ status: 201, message : "success" });
   } catch (error) {
-    res.status(401).json({status:401,error})
+    res.status(401).json({status:401,message : "failed",error})
   }
 });
 
