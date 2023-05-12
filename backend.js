@@ -117,7 +117,7 @@ app.use(bodyParser.json());
 
 app.post("/job-post", (req, res) => {
   console.log("acha :");
-  //console.log(req.body.job);
+  console.log(req.body.job);
   const { job, id } = req.body;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -132,7 +132,7 @@ app.post("/job-post", (req, res) => {
   obj = job;
   obj.createdAt=today;
   obj.institute_id = id;
-  //console.log(obj);
+  console.log(obj);
   const postJob = new Job(obj);
   postJob.save((err) => {
     if (err) {
@@ -144,7 +144,7 @@ app.post("/job-post", (req, res) => {
 });
 
 app.get("/getjobs", (req, res) => {
-  // //console.log("isme aa rha home wale m");
+  // console.log("isme aa rha home wale m");
   var email = "";
   var userType = "";
   Job.find({}, (err, jobs) => {
@@ -160,34 +160,34 @@ app.get("/getjobs", (req, res) => {
 });
 
 app.get("/api/job-details/:id/:student_id", async (req, res) => {
-  //////console.log(req.userID);
-  ////console.log("jsgiuf");
+  ////console.log(req.userID);
+  //console.log("jsgiuf");
 
   try {
     const { id, student_id } = req.params;
-    ////console.log(id);
-    ////console.log(student_id);
+    //console.log(id);
+    //console.log(student_id);
 
     var applied = false;
     var application_id;
-    //////console.log(id);
+    ////console.log(id);
     const application = await Application.findOne({
       job_id: id,
       student_id: student_id,
     });
     if (application) {
-      ////console.log("sbugfiw");
+      //console.log("sbugfiw");
       applied = true;
       application_id = application._id;
     } else {
-      ////console.log("sbfoie");
+      //console.log("sbfoie");
       applied = false;
     }
 
     const job = await Job.findOne({ _id: id });
     if (job) {
-      ////console.log("here at job detaisl");
-      ////console.log(job);
+      //console.log("here at job detaisl");
+      //console.log(job);
       res.status(200).json({
         status: 200,
         job: job,
@@ -216,12 +216,12 @@ app.post("/api/sendOtp", async (req, res) => {
 
   const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
-  //console.log(userType);
+  console.log(userType);
 
   let user = await User.findOne({ email });  // finsding user in student
   if (user) {
-    //console.log("i m hetyfiuwbri");
-    //console.log(user);
+    console.log("i m hetyfiuwbri");
+    console.log(user);
     return res
       .status(200)
       .send({ status: 400, message: "User already exists" });
@@ -258,13 +258,13 @@ app.post("/api/sendOtp", async (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      ////console.log(error);
+      //console.log(error);
       return res.status(200).send({
         status: 500,
         message: "Failed to send OTP",
       });
     } else {
-      ////console.log("OTP sent: " + info.response);
+      //console.log("OTP sent: " + info.response);
       return res.status(200).send({
         status: 200,
         message: "OTP sent",
@@ -283,17 +283,17 @@ app.post("/api/verifyOtp", async (req, res) => {
   // const otp = req.session.otp;
   let otp = req.body.randomotp;
 
-  //console.log(otp);
-  //console.log(otpEntered);
+  console.log(otp);
+  console.log(otpEntered);
 
   const hashedPassword = bcrypt.hashSync(password, 1);
   // req.session.hashedPassword = hashedPassword;
 
-  ////console.log(req.body);
-  //console.log("aa gya");
-  // //console.log(req.session);
+  //console.log(req.body);
+  console.log("aa gya");
+  // console.log(req.session);
 
-  ////console.log(req.body.userType);
+  //console.log(req.body.userType);
 
 
   // if (otpEntered === -1) {
@@ -304,7 +304,7 @@ app.post("/api/verifyOtp", async (req, res) => {
   //   });
   //   await userInstitute.save();
 
-  //   //console.log("institute registered");
+  //   console.log("institute registered");
   //   return res.status(200).send({
   //     status: 200,
   //     success: true,
@@ -315,7 +315,7 @@ app.post("/api/verifyOtp", async (req, res) => {
 
   if (otp === otpEntered) {
     if (req.body.userType === "student") {
-      ////console.log("student hu vai");
+      //console.log("student hu vai");
       const user = new User({
         name: name,
         email: email,
@@ -408,7 +408,7 @@ app.post("/api/verifyOtp", async (req, res) => {
       await userInstitute.save();
     }
 
-    ////console.log("bn gya");
+    //console.log("bn gya");
     return res.status(200).send({
       status: 200,
       success: true,
@@ -443,7 +443,7 @@ app.post("/api/add-institute", async (req, res) => {
   });
   await userInstitute.save();
 
-  //console.log("delete hone wala hai");
+  console.log("delete hone wala hai");
 
   await RegisterInstitute.deleteOne({ email: info.email });
 
@@ -456,13 +456,13 @@ app.post("/api/add-institute", async (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      ////console.log(error);
+      //console.log(error);
       return res.status(200).send({
         status: 500,
         message: "Failed to send Mail",
       });
     } else {
-      ////console.log("OTP sent: " + info.response);
+      //console.log("OTP sent: " + info.response);
       return res.status(200).send({
         status: 200,
         message: "Mail sent",
@@ -473,17 +473,17 @@ app.post("/api/add-institute", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  ////console.log("idhr aa gya");
+  //console.log("idhr aa gya");
   const { email, password, userType } = req.body;
-  // ////console.log(userType);
+  // //console.log(userType);
   if (userType === "student") {
     const userstudent = await User.findOne({
       email: email,
     });
-    //console.log("login m aa gya");
-    // //console.log(userstudent);
+    console.log("login m aa gya");
+    // console.log(userstudent);
     
-    //   ////console.log(res.data);
+    //   //console.log(res.data);
     if (!userstudent){
       return res.status(400).send({
         success: false,
@@ -502,7 +502,7 @@ app.post("/api/login", async (req, res) => {
 
       const token = await userstudent.generateAuthToken();
 
-      ////console.log(userstudent);
+      //console.log(userstudent);
 
       // cookiegenerate
 
@@ -517,7 +517,7 @@ app.post("/api/login", async (req, res) => {
       };
       // res.status(201).json({status:201,result})
 
-      // ////console.log("Logged in huehue");
+      // //console.log("Logged in huehue");
 
       res.status(201).json({ status: 201, result });
       // return res.status(200).send({
@@ -531,9 +531,9 @@ app.post("/api/login", async (req, res) => {
       email,
     });
 
-    // ////console.log("login m aa gya : institute");
-    // ////console.log(userInstitute);
-    //   ////console.log(res.data);
+    // //console.log("login m aa gya : institute");
+    // //console.log(userInstitute);
+    //   //console.log(res.data);
     if (!userInstitute)
       return res.status(400).send({
         success: false,
@@ -554,7 +554,7 @@ app.post("/api/login", async (req, res) => {
 
       const token = await userInstitute.generateAuthToken();
 
-      // ////console.log(userInstitute);
+      // //console.log(userInstitute);
 
       // cookiegenerate
 
@@ -569,7 +569,7 @@ app.post("/api/login", async (req, res) => {
       };
       // res.status(201).json({status:201,result})
 
-      // ////console.log("Logged in huehue");
+      // //console.log("Logged in huehue");
 
       res.status(201).json({ status: 201, result });
       // return res.status(200).send({
@@ -580,7 +580,7 @@ app.post("/api/login", async (req, res) => {
     }
   }
   else {
-    //console.log("admin");
+    console.log("admin");
     const useradmin = await Admin.findOne({
       email: email,
     });
@@ -659,7 +659,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 // user valid
 app.get("/validuser", authenticate, async (req, res) => {
-  //console.log(req);
+  console.log(req);
   try {
     
     let ValidUserOne = await User.findOne({ _id: req.userId });
@@ -691,7 +691,7 @@ app.get("/validuser", authenticate, async (req, res) => {
     //   if (!ValidUserOne) {
     //     ValidUserOne = await Admin.findOne({ _id: req.userId });
     //     if (ValidUserOne) {
-    //       //console.log("found admin");
+    //       console.log("found admin");
     //       res
     //         .status(201)
     //         .json({ status: 201, ValidUserOne, userType: "admin" });
@@ -713,7 +713,7 @@ app.get("/validuser", authenticate, async (req, res) => {
 
 // send email Link For reset Password
 app.post("/api/sendpasswordlink", async (req, res) => {
-  ////console.log(req.body)
+  //console.log(req.body)
 
   const { email, userType } = req.body;
 
@@ -745,10 +745,10 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            ////console.log("error",error);
+            //console.log("error",error);
             res.status(401).json({ status: 401, message: "email not send" });
           } else {
-            ////console.log("Email sent",info.response);
+            //console.log("Email sent",info.response);
             res
               .status(201)
               .json({ status: 201, message: "Email sent Succsfully" });
@@ -778,10 +778,10 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            ////console.log("error",error);
+            //console.log("error",error);
             res.status(401).json({ status: 401, message: "email not send" });
           } else {
-            ////console.log("Email sent",info.response);
+            //console.log("Email sent",info.response);
             res
               .status(201)
               .json({ status: 201, message: "Email sent Succsfully" });
@@ -798,18 +798,18 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 app.get("/forgotpassword/:id/:token/:usertype", async (req, res) => {
   const { id, token, usertype } = req.params;
 
-  ////console.log(usertype);
-  ////console.log("link ke baad ka get pe hu");
+  //console.log(usertype);
+  //console.log("link ke baad ka get pe hu");
 
   try {
     if (usertype == "student") {
-      ////console.log("student hu omk ?");
+      //console.log("student hu omk ?");
 
       const validuser = await User.findOne({ _id: id, verifytoken: token });
 
       const verifyToken = jwt.verify(token, keysecret);
 
-      ////console.log(verifyToken)
+      //console.log(verifyToken)
 
       if (validuser && verifyToken._id) {
         res.status(201).json({ status: 201, validuser });
@@ -824,7 +824,7 @@ app.get("/forgotpassword/:id/:token/:usertype", async (req, res) => {
 
       const verifyToken = jwt.verify(token, keysecret);
 
-      ////console.log(verifyToken)
+      //console.log(verifyToken)
 
       if (validuser && verifyToken._id) {
         res.status(201).json({ status: 201, validuser });
@@ -846,7 +846,7 @@ app.post("/api/:id/:token/:usertype", async (req, res) => {
 
   try {
     if (usertype == "student") {
-      ////console.log("student after password reset");
+      //console.log("student after password reset");
       const validuser = await User.findOne({ _id: id, verifytoken: token });
 
       const verifyToken = jwt.verify(token, keysecret);
@@ -893,13 +893,13 @@ app.post("/api/:id/:token/:usertype", async (req, res) => {
 
 app.get("/logout", authenticate, async (req, res) => { 
   
-  //console.log("sjbfouwbgro");
+  console.log("sjbfouwbgro");
   try {
     req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
       return curelem.token !== req.token; 
     });
 
-    //console.log("logout me aa rha");
+    console.log("logout me aa rha");
 
     res.clearCookie("usercookie", { path: "/" });
 
@@ -907,8 +907,8 @@ app.get("/logout", authenticate, async (req, res) => {
 
     
 
-    //console.log("save ho rha");
-    // //console.log(rootUser);
+    console.log("save ho rha");
+    // console.log(rootUser);
 
     res.status(201).json({ status: 201, message : "success" });
   } catch (error) {
@@ -917,7 +917,7 @@ app.get("/logout", authenticate, async (req, res) => {
 });
 
 app.post("/apply", async (req, res) => {
-  ////console.log("here at apply");
+  //console.log("here at apply");
   const id = req.body.id;
   const student_id = req.body.student_id;
 
@@ -936,10 +936,10 @@ app.post("/apply", async (req, res) => {
 
 app.get("/api/jobStatus/:id", async (req, res) => {
   const { id } = req.params;
-  //////console.log("here at job status");
+  ////console.log("here at job status");
   try {
     const student_applications = await Application.find({ student_id: id });
-    ////console.log(student_applications);
+    //console.log(student_applications);
     Promise.all(
       student_applications.map(async (application) => {
         const job = await Job.findOne({ _id: application.job_id });
@@ -959,21 +959,21 @@ app.get("/api/jobStatus/:id", async (req, res) => {
       res.status(200).send({ status: 200, applicationArray });
     });
   } catch (error) {
-    ////console.log(error);
+    //console.log(error);
     res.status(500).send({ status: 500, err });
   }
 });
 
 app.get("/jobPostings/:id", async (req, res) => {
-  //////console.log("here at job postings");
+  ////console.log("here at job postings");
   try {
     const { id } = req.params;
     const jobs = await Job.find({ institute_id: id });
     Promise.all(
       jobs.map(async (job) => {
         let obj = {};
-        //console.log("the last update date is");
-        //console.log(job.lastUpdateDate);
+        console.log("the last update date is");
+        console.log(job.lastUpdateDate);
         obj.title = await job.title;
         obj._id = await job._id;
         obj.createdAt = await job.createdAt;
@@ -985,19 +985,19 @@ app.get("/jobPostings/:id", async (req, res) => {
       res.status(200).send({ status: 200, jobArray });
     });
   } catch (error) {
-    ////console.log(error);
+    //console.log(error);
     res.status(500).send({ status: 500, err });
   }
 });
 
 app.get("/jobApplicants/:id", async (req, res) => {
-  //////console.log("here at job applicants");
+  ////console.log("here at job applicants");
   try {
-    ////console.log("yolo");
+    //console.log("yolo");
     const { id } = req.params;
-    ////console.log(id);
+    //console.log(id);
     const applications = await Application.find({ job_id: id });
-    ////console.log(applications);
+    //console.log(applications);
     Promise.all(
       applications.map(async (application) => {
         const student = await User.findOne({ _id: application.student_id });
@@ -1018,7 +1018,7 @@ app.get("/jobApplicants/:id", async (req, res) => {
       res.status(200).send({ status: 200, applicantArray });
     });
   } catch (error) {
-    ////console.log(error);
+    //console.log(error);
     res.status(500).send({ status: 500, error });
   }
 });
@@ -1026,14 +1026,14 @@ app.get("/jobApplicants/:id", async (req, res) => {
 app.post("/jobApplicantStatusChange", async (req, res) => {
   try {
     const { application_id, newStatus, student_email } = req.body;
-    ////console.log("here at status change");
-    ////console.log(application_id);
-    ////console.log(newStatus);
+    //console.log("here at status change");
+    //console.log(application_id);
+    //console.log(newStatus);
     const application = await Application.updateOne(
       { _id: application_id },
       { $set: { status: newStatus } }
     );
-    //console.log(newStatus);
+    console.log(newStatus);
     if (newStatus === "Accepted") {
       // Save the OTP to the user's record in the database
       const mailOptions = {
@@ -1043,17 +1043,17 @@ app.post("/jobApplicantStatusChange", async (req, res) => {
         text: `You got some changes in status of job you have applied , please login to our platform for check`,
       };
 
-      //console.log("acceptd hai bahi");
+      console.log("acceptd hai bahi");
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          ////console.log(error);
+          //console.log(error);
           return res.status(200).send({
             status: 500,
             // message: "Failed to send OTP",
           });
         } else {
-          //console.log("mail gya");
-          ////console.log("OTP sent: " + info.response);
+          console.log("mail gya");
+          //console.log("OTP sent: " + info.response);
           return res.status(200).send({
             status: 200,
             // message: "OTP sent",
@@ -1064,7 +1064,7 @@ app.post("/jobApplicantStatusChange", async (req, res) => {
     }
     res.send("success");
   } catch (err) {
-    ////console.log(err);
+    //console.log(err);
     res.send(err);
   }
 });
@@ -1090,14 +1090,14 @@ app.get("/api/me", auth, async (req, res) => {
 
 app.get("/api/mename", auth, async (req, res) => {
   const { _id } = req.user;
-  //console.log("inside mename");
+  console.log("inside mename");
   try {
     let user = await User.findById(_id);
     if (!user) {
       user = await UserInstitute.findById(_id);
       // return res.status(404).json({ error: 'User not found' });
     }
-    //console.log(user);
+    console.log(user);
     res.json({ name: user.name });
   } catch (error) {
     //console.error(error);
@@ -1107,7 +1107,7 @@ app.get("/api/mename", auth, async (req, res) => {
 
 app.post("/api/subscribe", (req, res) => {
   const { email } = req.body;
-  ////console.log(email);
+  //console.log(email);
   User.findOneAndUpdate(
     { email },
     { subscribedToJobAlerts: true },
@@ -1121,7 +1121,7 @@ app.post("/api/subscribe", (req, res) => {
 
 app.post("/api/unsubscribe", (req, res) => {
   const { email } = req.body;
-  // //console.log(email);
+  // console.log(email);
   User.findOneAndUpdate(
     { email },
     { subscribedToJobAlerts: false },
@@ -1154,7 +1154,7 @@ function sendJobNotification(job) {
         if (error) {
           //console.error(error);
         } else {
-          ////console.log('Email sent: ' + info.response);
+          //console.log('Email sent: ' + info.response);
         }
       });
     }
@@ -1187,12 +1187,12 @@ function checkForNewJobs() {
 cron.schedule("* * * * *", checkForNewJobs); // run every minute
 
 app.get("/application-form/:job_id/:user_id", async (req, res) => {
-  //console.log("right herefyviubriu");
+  console.log("right herefyviubriu");
   const { job_id, user_id } = req.params;
   const job = await Job.findOne({ _id: job_id });
-  //console.log(job);
+  console.log(job);
   const user = await User.findOne({ _id: user_id });
-  //console.log(user);
+  console.log(user);
   if (job && user) {
     const academic = await Academic.find({ email: user.email });
     const experience = await UserExperience.find({ email: user.email });
@@ -1203,7 +1203,7 @@ app.get("/application-form/:job_id/:user_id", async (req, res) => {
 
     let obj = {};
     if (academic && experience && personal && publication) {
-      //console.log("brgi");
+      console.log("brgi");
       obj.personal = personal;
       obj.academic = academic;
       obj.experience = experience;
@@ -1211,8 +1211,8 @@ app.get("/application-form/:job_id/:user_id", async (req, res) => {
       obj.por = por;
       obj.reference = reference;
       obj.jobFields = job.fields;
-      //console.log("the job fields are: the second time");
-      //console.log(obj.jobFields);
+      console.log("the job fields are: the second time");
+      console.log(obj.jobFields);
       res.json({ status: 200, dataObject: obj });
     } else {
       res.json({ status: 500 });
@@ -1223,11 +1223,11 @@ app.get("/application-form/:job_id/:user_id", async (req, res) => {
 });
 
 app.post("/application-form/:job_id/:user_id", async (req, res) => {
-  //console.log("posting at application form");
+  console.log("posting at application form");
   const { job_id, user_id } = req.params;
   // const { jobFields } = req.body;
-  // //console.log("jobfields are:");
-  // //console.log(jobFields);
+  // console.log("jobfields are:");
+  // console.log(jobFields);
   // const obj = {};
   // obj.personal = jobFields.personal;
   // obj.academic = jobFields.academic;
@@ -1236,13 +1236,13 @@ app.post("/application-form/:job_id/:user_id", async (req, res) => {
   // obj.por = jobFields.por;
   // obj.reference = jobFields.reference;
   //
-  // //console.log("the created obj is");
-  // //console.log(obj);
+  // console.log("the created obj is");
+  // console.log(obj);
 
   const { dataToSend } = req.body;
   const obj = dataToSend;
-  //console.log("i got this data from the application form");
-  //console.log(obj);
+  console.log("i got this data from the application form");
+  console.log(obj);
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -1250,7 +1250,7 @@ app.post("/application-form/:job_id/:user_id", async (req, res) => {
 
   today = yyyy + '-' + mm + '-' + dd;
 
-  //console.log(today);
+  console.log(today);
 
 
 
@@ -1263,11 +1263,11 @@ app.post("/application-form/:job_id/:user_id", async (req, res) => {
     application_date:today,
   });
 
-  //console.log("checking the new application");
-  //console.log(new_application);
+  console.log("checking the new application");
+  console.log(new_application);
   const saved = await new_application.save();
   if (saved) {
-    //console.log("done");
+    console.log("done");
     res.send({ status: 200 });
   } else {
     res.send({ status: 500 });
@@ -1275,16 +1275,16 @@ app.post("/application-form/:job_id/:user_id", async (req, res) => {
 });
 
 app.get("/api/applicant-details/:id", async (req, res) => {
-  //console.log(Application.schema.obj);
+  console.log(Application.schema.obj);
   const { id } = req.params;
   const application = await Application.findOne({ _id: id });
-  //console.log("here at applicant-details");
-  //console.log(application);
+  console.log("here at applicant-details");
+  console.log(application);
   if (application) {
     const job_id = application.job_id;
     const job = await Job.findOne({ _id: job_id });
     if (job) {
-      //console.log(application.student_details);
+      console.log(application.student_details);
       let obj = {};
       obj.fields = job.fields;
       obj.student_details = application.student_details;
@@ -1302,18 +1302,18 @@ app.get("/api/applicant-details/:id", async (req, res) => {
 // POST /api/comments
 app.post('/api/comments', async (req, res) => {
 
-  //console.log("inside backend after submit");
+  console.log("inside backend after submit");
 
   const { text, user, jobPosting } = req.body;
-  // //console.log(text);
-  // //console.log(user);
-  // //console.log(jobPosting);
+  // console.log(text);
+  // console.log(user);
+  // console.log(jobPosting);
   const comment = new Comment({ text, user, jobPosting });
-  // //console.log("1");
+  // console.log("1");
 
   try {
     const savedComment = await comment.save();
-    // //console.log("2");
+    // console.log("2");
     res.json(savedComment);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -1323,10 +1323,10 @@ app.post('/api/comments', async (req, res) => {
 // GET /api/comments?jobPostingId=<jobPostingId>
 app.get('/api/getcomments', async (req, res) => {
   const { jobPostingId } = req.query;
-  //console.log("3");
+  console.log("3");
   try {
     const comments = await Comment.find({ jobPosting: jobPostingId }).populate('user');
-    //console.log(comments);
+    console.log(comments);
     res.json(comments);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -1374,7 +1374,7 @@ app.get('/api/getexperiences', async (req, res) => {
 app.get('/api/getsubscriptionstatus', auth, async (req, res) => {
 
   const { _id } = req.user;
-  //console.log()
+  console.log()
   const email = "";
 
   try {
@@ -1410,7 +1410,7 @@ app.get('/api/getsubscriptionstatus', auth, async (req, res) => {
 
 // Create a new experience
 app.post('/api/createExperiences', async (req, res) => {
-  // //console.log(req.body);
+  // console.log(req.body);
   const experience = new Experience(req.body);
   await experience.save();
   res.json(experience);
@@ -1419,10 +1419,10 @@ app.post('/api/createExperiences', async (req, res) => {
 // get photo for experience section
 
 app.post('/api/getimage', async (req, res) => {
-  // //console.log(req.body);
+  // console.log(req.body);
   const email = req.body.email;
-  //console.log(req.body);
-  //console.log(email);
+  console.log(req.body);
+  console.log(email);
 
   if(!req.body)
   {
@@ -1433,8 +1433,8 @@ app.post('/api/getimage', async (req, res) => {
 
     let user = await Personal.findOne({ email : email });
 
-    // //console.log(user);
-    // //console.log(user.profile_image_url);
+    // console.log(user);
+    // console.log(user.profile_image_url);
 
     let imagesrc = "#";
 
@@ -1451,9 +1451,9 @@ app.post('/api/getimage', async (req, res) => {
 
 // Add a comment to an experience
 app.post("/api/addcomments/:id", async (req, res) => {
-  // //console.log("inside api");
-  // //console.log(req.body);
-  //console.log("add comments");
+  // console.log("inside api");
+  // console.log(req.body);
+  console.log("add comments");
   const experience = await Experience.findById(req.params.id);
   const commentnew = new CommentNew({
     experience: experience._id,
@@ -1464,7 +1464,7 @@ app.post("/api/addcomments/:id", async (req, res) => {
   experience.comments.push(commentnew);
   await experience.save();
 
-  //console.log("all done");
+  console.log("all done");
 
   res.json({
     comment: commentnew.comment,
@@ -1476,7 +1476,7 @@ app.post("/api/addcomments/:id", async (req, res) => {
 
 // Update an experience
 app.put('/api/experiences/:id', async (req, res) => {
-  //console.log(" experiences");
+  console.log(" experiences");
   const experience = await Experience.findByIdAndUpdate(req.params.id, req.body, { new: true });
   res.json(experience);
 });
@@ -1484,7 +1484,7 @@ app.put('/api/experiences/:id', async (req, res) => {
 // get comments
 // app.get('/api/experiences', async (req, res) => {
 //   try {
-//     //console.log("inside get comment api");
+//     console.log("inside get comment api");
 //     const experience = await Experience.findById(req.params.id);
 //     if (!experience) {
 //       return res.status(404).json({ message: 'Experience not found' });
@@ -1499,7 +1499,7 @@ app.put('/api/experiences/:id', async (req, res) => {
 
 // Get all comments for an experience
 app.get('/api/getcomments/:id', async (req, res) => {
-  //console.log("get comments");
+  console.log("get comments");
   try {
     const comments = await CommentNew.find({ experience: req.params.id })
       .populate('experience', 'companyName')
@@ -1522,7 +1522,7 @@ app.get("/custom-form-fields", (req, res) => {
   const publicationKeys = Object.keys(publicationSchemaobj)
   const referenceKeys = Object.keys(referenceSchemaobj)
   const personalKeys = Object.keys(personalSchemaobj)
-  //console.log(personalKeys);
+  console.log(personalKeys);
   const obj = {};
   obj.academicKeys = academicKeys;
   obj.experienceKeys = experienceKeys;
@@ -1570,15 +1570,15 @@ app.get("/custom-form-fields", (req, res) => {
 
 
 app.post("/delete-job", async (req, res) => {
-  //console.log("hereregueiryg");
+  console.log("hereregueiryg");
   const { id } = req.body;
-  //console.log(id);
+  console.log(id);
   const job = await Job.updateOne({ _id: id }, { $set: { deleted: true } });
   if (job) {
-    //console.log("deleted");
+    console.log("deleted");
     res.send({ status: 200 });
   } else {
-    //console.log("error deleting");
+    console.log("error deleting");
     res.send({ status: 500 });
   }
 })
@@ -1587,18 +1587,18 @@ app.post("/withdraw-application", async (req, res) => {
   const { id } = req.body;
   const application = await Application.updateOne({ _id: id }, { $set: { status: "Withdrew" } });
   if (application) {
-    //console.log("withdrew");
+    console.log("withdrew");
     res.send({ status: 200 });
   } else {
-    //console.log("error");
+    console.log("error");
     res.send({ status: 500 });
   }
 })
 
 
 app.post("/api/registerInstitute", async (req, res) => {
-  // //console.log("inside api");
-  //console.log(req.body);
+  // console.log("inside api");
+  console.log(req.body);
 
   const userName = req.body.formData.username;
   const email = req.body.formData.email;
@@ -1607,7 +1607,7 @@ app.post("/api/registerInstitute", async (req, res) => {
   const year = req.body.formData.year;
   const phone = req.body.formData.phone;
 
-  //console.log(email);
+  console.log(email);
 
   const newInstitute = new RegisterInstitute({
     usersname: userName,
@@ -1619,16 +1619,16 @@ app.post("/api/registerInstitute", async (req, res) => {
 
   });
 
-  //console.log("chck ke pehle");
-  //console.log(newInstitute);
+  console.log("chck ke pehle");
+  console.log(newInstitute);
 
   try {
     let check1 = await RegisterInstitute.find({ email: email });
     let check2 = await UserInstitute.find({ email: email });
-    //console.log(check1);
-    //console.log(check2);
+    console.log(check1);
+    console.log(check2);
     if (check1.length !== 0 || check2.length!==0) {
-      //console.log("inside check");
+      console.log("inside check");
       return res.status(200).send({ status: 400, message: "User already exists" });
     }
     else {
@@ -1643,11 +1643,11 @@ app.post("/api/registerInstitute", async (req, res) => {
       });
     }
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     return res.status(500).send({ status: 500 , message: "Request Failed"});
   }
 
-  //console.log("check ke baad ");
+  console.log("check ke baad ");
 
 
 });
@@ -1706,9 +1706,9 @@ app.get("/create-workbook/:id", async (req, res) => {
   var name_of_file = "_applicant_details.xlsx";
   if (application) {
     name_of_file = application.student_details.personal[0].name + name_of_file;
-    //console.log("got into application");
+    console.log("got into application");
     const student_details = application.student_details;
-    //console.log(student_details);
+    console.log(student_details);
     const wb = new xl.Workbook();
     const ws = wb.addWorksheet("data");
     ws.cell(1, 2).string("data field");
@@ -1722,8 +1722,8 @@ app.get("/create-workbook/:id", async (req, res) => {
             ws.cell(rowIndex, 1).string(details);
             flag = 1;
           }
-          //console.log(k);
-          //console.log(stu[k]);
+          console.log(k);
+          console.log(stu[k]);
           ws.cell(rowIndex, 2).string(k);
           ws.cell(rowIndex, 3).string(stu[k]);
           rowIndex++;
@@ -1735,17 +1735,17 @@ app.get("/create-workbook/:id", async (req, res) => {
         flag = 0;
       });
     });
-    //console.log("done till here");
+    console.log("done till here");
     await wb.write(name_of_file);
 
   }
   res.send({ status: 200 });
 })
 app.get("/export/:id", async (req, res, next) => {
-  //console.log("here");
+  console.log("here");
   const { id } = req.params;
   const application = await Application.findOne({ _id: id });
-  //console.log(application);
+  console.log(application);
   //await createWorkbook(id);
   var name_of_file = application.student_details.personal[0].name + "_applicant_details.xlsx";
   const file = __dirname + `\\${name_of_file}`;
@@ -1753,17 +1753,17 @@ app.get("/export/:id", async (req, res, next) => {
   const mimeType = mime.getType(file);
   res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
   res.setHeader("Content-Type", mimeType);
-  //console.log("here too");
+  console.log("here too");
   res.download(file, name_of_file);
 
 
 
-  //console.log("and afetr");
-  //console.log('rwugteiu');
+  console.log("and afetr");
+  console.log('rwugteiu');
 
 
 })
 
 app.listen(process.env.PORT, () => {
-  //console.log("Server is running on port 4000");
+  console.log("Server is running on port 4000");
 });

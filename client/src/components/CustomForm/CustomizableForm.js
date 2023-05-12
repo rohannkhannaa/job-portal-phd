@@ -49,19 +49,19 @@ function CustomizableForm({handleSubmit,updateForm}){
 
   const collectDataPersonal = (data)=> {
     setPersonalData(data);
-    //console.log(data);
+    console.log(data);
   }
   const collectDataPublication = (data)=> {
     setPublicationData(data);
-    //console.log(data);
+    console.log(data);
   }
   const collectDataPor = (data)=> {
     setPorData(data);
-    //console.log(data);
+    console.log(data);
   }
   const collectDataExperience = (data)=> {
     setExperienceData(data);
-    //console.log(data);
+    console.log(data);
   }
   const collectDataAcademic = (data)=> {
     setAcademicData(data);
@@ -70,7 +70,7 @@ function CustomizableForm({handleSubmit,updateForm}){
   }
   const collectDataReference = (data)=> {
     setReferenceData(data);
-    //console.log(data);
+    console.log(data);
   }
 
   const handleDataCollection = ()=> {

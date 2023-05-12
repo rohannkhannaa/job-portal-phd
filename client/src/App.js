@@ -52,10 +52,10 @@ function Root() {
   // const location = useLocation();
 
   const ProfileValid = async () => {
-    //console.log("inside profilevalid");
+    console.log("inside profilevalid");
       let token = localStorage.getItem("usersdatatoken");
 
-      //console.log(token);
+      console.log(token);
       const res = await fetch(`${process.env.REACT_APP_API_PROXY}/validuser`, {
           method: "GET",
           headers: {

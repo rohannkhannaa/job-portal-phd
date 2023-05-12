@@ -54,7 +54,7 @@ function AppliedJob({user,type}){
   }
 
 
-  //console.log(job);
+  console.log(job);
   return(
     <>
     <Modal show={show} onHide={handleClose}>

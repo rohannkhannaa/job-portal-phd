@@ -46,67 +46,38 @@ function App({ user, type }) {
     window.location.href = "/interviewtips";
   }
 
-
   const logoutuser = async () => {
     setShow(false);
     let token = localStorage.getItem("usersdatatoken");
 
     console.log("inside logout");
-    console.log(token); 
-    if(!token){
-      console.log("Token was not found !!");
-      return ;
-    }
+    console.log(token);
 
-    // axios.get("/logout", {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": token,
-    //     "Accept": "application/json",
-    //   },
-    //   withCredentials: true
-    // }).then((res) => {
-    //   console.log("after logout");
-    //   const data = res.data;
-    //   console.log(data);
-    //   if (data.status === 201) {
-    //     console.log("user logout");
-    //     localStorage.removeItem("usersdatatoken");
-    //     window.location.href = "/";
-    //   } else {
-    //     console.log("error");
-    //   }
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-    const res = await fetch(`${process.env.REACT_APP_API_PROXY}/logout`, {
-      method: "GET",
+    const res = await axios.get("/logout", {
       headers: {
         "Content-Type": "application/json",
         "Authorization": token,
-        Accept: "application/json"
+        "Accept": "application/json"
       },
-      credentials: "include"
+      withCredentials: true
     });
-    //console.log(res);
     console.log("after logout");
-  
-    const data = await res.json();
-  
+
+    const data = res.data;
+
     console.log(data);
-  
-    if (data.status == 201 || data.message === 'success') {
+
+    if (data.status == 201) {
       console.log("user logout");
       localStorage.removeItem("usersdatatoken");
-      //setLoggedIn(false);
-  
-      //history("/");
+
       window.location.href = "/";
-  
+
     } else {
       console.log("error");
     }
   }
+
 
 
   

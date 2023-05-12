@@ -83,7 +83,7 @@ function JobDetails({ user, type }) {
 
     //   if (data.applied === true && type === "student") {
     //     setApplication_id(data.application_id);
-    //     //console.log("here");
+    //     console.log("here");
     //     console.log(data.application_id);
     //     setButtonText("Withdraw Application");
     //   } else if (data.applied === false && type === "student") {

@@ -91,7 +91,7 @@ function JobApplicants({ user, type }) {
     data: personalData
   }
 
-  //console.log(applicants);
+  console.log(applicants);
   return(
     <>
     <Modal show={showAccept} onHide={handleCloseAccept}>

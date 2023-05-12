@@ -74,7 +74,7 @@ function CustomizableForm({handleSubmit}){
         setPorData(res.data.porData);
         setExperienceData(res.data.experienceData);
         setReferenceData(res.data.referenceData);
-        //console.log(res.data.obj);
+        console.log(res.data.obj);
         setGotFields(true);
         //fieldsSetting();
         setFieldsSet(true);
@@ -129,7 +129,7 @@ function CustomizableForm({handleSubmit}){
 // }
 
 
-    //console.log(personalObj);
+    console.log(personalObj);
 
 
 
@@ -166,9 +166,9 @@ function CustomizableForm({handleSubmit}){
     setAcademic(!academic);
     const copyObj=academicData;
     Object.keys(copyObj).forEach(k=> copyObj[k]=false)
-    //console.log(copyObj);
+    console.log(copyObj);
     setAcademicData(copyObj);
-    //console.log(copyObj);
+    console.log(copyObj);
   }
 
   function academicFieldChosen(field){
@@ -264,7 +264,7 @@ function CustomizableForm({handleSubmit}){
   }
 
   function selectAllClicked(field){
-    //console.log("why wont it work");
+    console.log("why wont it work");
     if(field==="personal"){
       if(personalSelectAll===false){
         const copyObj=personalData;

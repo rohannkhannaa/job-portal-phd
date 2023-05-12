@@ -15,8 +15,8 @@ function ApplicationForm({type}){
 
   const {job_id,user_id}=useParams();
 
-  //console.log(job_id);
-  //console.log(user_id);
+  console.log(job_id);
+  console.log(user_id);
   const url=`${process.env.REACT_APP_API_PROXY}/application-form/${job_id}/${user_id}`;
   const [jobFields,setJobFields]=useState({});
   const [dataRecieved,setDataRecieved]=useState(false);
@@ -229,7 +229,7 @@ function submitClicked(){
       getDetails();
       // return;
     }
-    //console.log("srni");
+    console.log("srni");
 
 
   }, []);
@@ -743,7 +743,7 @@ const checkFields = () => {
 
 
 
-//console.log(jobFields);
+console.log(jobFields);
   return(
     <>
     <Modal show={show} onHide={handleClose}>

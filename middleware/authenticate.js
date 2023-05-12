@@ -13,7 +13,7 @@ const authenticate = async(req,res,next)=>{
     try {
         const token = req.headers.authorization;
 
-        //console.log("authentication m aa rha");
+        console.log("authentication m aa rha");
         console.log(token);
         
         const verifytoken = jwt.verify(token,keysecret);
@@ -26,18 +26,18 @@ const authenticate = async(req,res,next)=>{
         console.log(rootUser);
     
         if(!rootUser) {
-            //console.log("institution ka authentication");
+            console.log("institution ka authentication");
             rootUser = await UserInstitute.findOne({_id:verifytoken._id});
-            //console.log(rootUser);
+            console.log(rootUser);
         }
 
         if(!rootUser) {
-            //console.log("institution ka authentication");
+            console.log("institution ka authentication");
             rootUser = await Admin.findOne({_id:verifytoken._id});
             console.log(rootUser);
         }
 
-        // //console.log(rootUser);
+        // console.log(rootUser);
         
         if(!rootUser) {throw new Error("user not found")};
 
