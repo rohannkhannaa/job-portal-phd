@@ -35,7 +35,6 @@ route.post("/resume-upload/:id", upload.single("resume"), async (req, res) => {
     console.log(buffer);
     console.log(id);
     console.log("Yha1");
-    // const PDFParserModule =  import("pdf2json");
   
     console.log("Yha1");
     const PDFParser = PDFParserModule.default;

@@ -148,7 +148,6 @@ function CustomizableForm({handleSubmit,updateForm}){
   
   return(
     <>
-    <h1>Hona chahiye</h1>
     <Modal show={show} onHide={handleClose}>
     <div class="relative block overflow-hidden text-left align-middle transform bg-white  sm:max-w-sm rounded-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6" style={{margin:'auto', marginTop:'10px', marginBottom:'10px'}}>
         <div class="text-center">
