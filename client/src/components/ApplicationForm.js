@@ -17,7 +17,7 @@ function ApplicationForm({type}){
 
   //console.log(job_id);
   //console.log(user_id);
-  const url=`/application-form/${job_id}/${user_id}`;
+  const url=`${process.env.REACT_APP_API_PROXY}/application-form/${job_id}/${user_id}`;
   const [jobFields,setJobFields]=useState({});
   const [dataRecieved,setDataRecieved]=useState(false);
   const history = useNavigate();
@@ -218,9 +218,6 @@ function submitClicked(){
     })
     .catch((err)=>console.log(err));
 }
-
-
-
 
 
 
