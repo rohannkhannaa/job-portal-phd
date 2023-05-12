@@ -150,7 +150,6 @@ function App({ user, type }) {
           {type !== "" && type !== "admin" && <Nav>
             <NavDropdown title={<FontAwesomeIcon icon={faUser} />} id="collasible-nav-dropdown">
               {type !== "institute" && <NavDropdown.Item><Link to="/profile" style={{ color: 'black', textDecoration: 'none' }}>Profile</Link></NavDropdown.Item>}
-              {type !== "institute" && <NavDropdown.Item><Link to="/account" style={{ color: 'black', textDecoration: 'none' }}>Account</Link></NavDropdown.Item>}
               {type === "student" && <NavDropdown.Item><Link to={`/application/${user._id}`} style={{ color: 'black', textDecoration: 'none' }}>My Applications</Link></NavDropdown.Item>}
               {type === "institute" && <NavDropdown.Item><Link to="/job-postings" style={{ color: 'black', textDecoration: 'none' }}>My Job Posting</Link></NavDropdown.Item>}
               <NavDropdown.Divider />
