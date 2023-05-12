@@ -1,25 +1,21 @@
 import React from "react";
 import JobCard from "./JobCard";
 import { useState, useEffect } from "react";
-import axios from './axios';
-import './css/Job.css';
+import axios from "./axios";
+import "./css/Job.css";
 // import React from 'react';
 import Slider from "react-slick";
-import './css/DetailsContainer.css';
+import "./css/DetailsContainer.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import 'animate.css';
+import "animate.css";
 import DetailsContainer from "./DetailsContainer";
 
 import DetailsContainer2 from "./DetailsContainer2";
 import Footer from "./Footer";
-import locate from './Location.png'; // import the image file
-
-
+import locate from "./Location.png"; // import the image file
 
 function Job() {
-
   const settings = {
     dots: true,
     infinite: true,
@@ -27,7 +23,7 @@ function Job() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000 // set the time between each slide transition to 3 seconds (3000 milliseconds)
+    autoplaySpeed: 2000, // set the time between each slide transition to 3 seconds (3000 milliseconds)
   };
   const [jobs, setJobs] = useState([]);
   const [locationFilter, setLocationFilter] = useState("");
@@ -37,7 +33,8 @@ function Job() {
   // const url = '/';
 
   useEffect(() => {
-    axios.get("/getjobs")
+    axios
+      .get("/getjobs")
       .then((response) => {
         console.log(response);
         setJobs(response.data.jobDetails);
@@ -66,7 +63,8 @@ function Job() {
     if (locationFilter.trim() !== "") {
       filteredJobs = filteredJobs.filter(
         (job) =>
-          job.location.toLowerCase().indexOf(locationFilter.toLowerCase()) !== -1
+          job.location.toLowerCase().indexOf(locationFilter.toLowerCase()) !==
+          -1
       );
     }
 
@@ -84,7 +82,8 @@ function Job() {
     if (instituteFilter.trim() !== "") {
       filteredJobs = filteredJobs.filter(
         (job) =>
-          job.college.toLowerCase().indexOf(instituteFilter.toLowerCase()) !== -1
+          job.college.toLowerCase().indexOf(instituteFilter.toLowerCase()) !==
+          -1
       );
     }
 
@@ -97,8 +96,7 @@ function Job() {
     setSalaryFilter("");
     setInstituteFilter("");
     setFilteredJobs(jobs);
-  }
-
+  };
 
   const locations = [
     "All Locations",
@@ -129,9 +127,8 @@ function Job() {
     "Tripura",
     "Uttar Pradesh",
     "Uttarakhand",
-    "West Bengal"
+    "West Bengal",
   ];
-
 
   const institutes = [
     "All Institutes",
@@ -166,18 +163,12 @@ function Job() {
     "BITS Mesra",
     "BITS Hyderabad",
     "BITS Goa",
-    "BITS Dubai"
+    "BITS Dubai",
   ];
-
-
 
   return (
     <>
-
       <DetailsContainer />
-
-
-
 
       <section class="dd">
         <div class="cc">
@@ -185,30 +176,24 @@ function Job() {
               1000+ jobs for you to explore
             </h2> */}
 
-
-
-          <div className="filter-container job-filters" >
-
+          <div className="filter-container job-filters">
             <select
               value={locationFilter}
               onChange={handleLocationFilterChange}
             >
-
               {locations?.map((location) => (
                 <option key={location} value={location}>
-
                   {location}
                 </option>
               ))}
             </select>
 
-
-
-            <select
-              value={salaryFilter}
-              onChange={handleSalaryFilterChange}
-            >
-              <img src={locate} alt="My Image" style={{ height: '35px', marginRight: '40px' }} />
+            <select value={salaryFilter} onChange={handleSalaryFilterChange}>
+              <img
+                src={locate}
+                alt="My Image"
+                style={{ height: "35px", marginRight: "40px" }}
+              />
               <option value="">All Salary Ranges</option>
               <option value="0-9999">Less than 10,000</option>
               <option value="10000-29999">10,000 - 29,999</option>
@@ -217,7 +202,10 @@ function Job() {
               <option value="100000-999999">More than 100,000</option>
             </select>
 
-            <select value={instituteFilter} onChange={handleInstituteFilterChange}>
+            <select
+              value={instituteFilter}
+              onChange={handleInstituteFilterChange}
+            >
               {institutes.map((institute) => (
                 <option key={institute} value={institute}>
                   {institute}
@@ -226,44 +214,50 @@ function Job() {
             </select>
 
             <div class="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:-mx-2">
-              <button onClick={handleFilterApply}
+              <button
+                onClick={handleFilterApply}
                 class="px-6 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg focus:ring focus:ring-blue-300 focus:ring-opacity-80 fo sm:mx-2 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-                style={{ background: "#007FFF", borderRadius: "20px" }}>
+                style={{ background: "#007FFF", borderRadius: "20px" }}
+              >
                 Search
               </button>
 
-              <button onClick={handleClearFilters} class="px-6 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg focus:ring focus:ring-blue-300 focus:ring-opacity-80 fo sm:mx-2 hover:bg-blue-500 focus:outline-none focus:bg-blue-500" style={{ backgroundColor: "rgba(255, 0, 0, 0.6)", borderRadius: "20px" }}>
+              <button
+                onClick={handleClearFilters}
+                class="px-6 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg focus:ring focus:ring-blue-300 focus:ring-opacity-80 fo sm:mx-2 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                style={{
+                  backgroundColor: "rgba(255, 0, 0, 0.6)",
+                  borderRadius: "20px",
+                }}
+              >
                 Clear Filters
               </button>
-
-
             </div>
-
           </div>
-
-
         </div>
       </section>
 
       <div className="job-container">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gridAutoRows: "350px", // Replace 350px with the height of your job card
+            gridAutoFlow: "dense",
+            gap: "100px",
+            padding: "0 100px",
+            marginTop: "60px",
 
-
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gridAutoRows: "350px", // Replace 350px with the height of your job card
-          gridAutoFlow: "dense",
-          gap: "100px",
-          padding: "0 100px",
-          marginTop: "60px",
-
-          '@media (max-width: 767px)': {
-            padding: "0px"
-          }
-
-        }}>
-          {filteredJobs?.map(job => (
-            <div key={job._id} style={{ display: job.deleted ? 'none' : 'block' }}>
+            "@media (max-width: 767px)": {
+              padding: "0px",
+            },
+          }}
+        >
+          {filteredJobs?.map((job) => (
+            <div
+              key={job._id}
+              style={{ display: job.deleted ? "none" : "block" }}
+            >
               <JobCard
                 _id={job._id}
                 title={job.title}
@@ -277,30 +271,19 @@ function Job() {
             </div>
           ))}
         </div>
-
-
-
-
-
-
-
       </div>
       <br></br>
       <br></br>
       <br></br>
 
-
       <DetailsContainer2 />
 
-
       <br></br>
 
       <br></br>
       <br></br>
-
 
       <Footer />
-
     </>
   );
 }
