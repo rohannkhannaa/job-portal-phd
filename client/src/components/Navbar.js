@@ -53,9 +53,8 @@ function App({ user, type }) {
     console.log("inside logout");
     console.log(token);
 
-    const res = await axios.get("/logout", {
+    await axios.get("/logout", {
       headers: {
-        "Allow-Control-Allow-Origin" : "*",
         "Content-Type": "application/json",
         "Authorization": token,
         "Accept": "application/json"
@@ -83,9 +82,6 @@ function App({ user, type }) {
    
   }
 
-
-
-  
 
   const handleJobPost = () => {
     window.location.href = "/job-post";
