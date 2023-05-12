@@ -185,7 +185,7 @@ export default function Profile({ user, type }) {
                   {name}
                 </p>
                 </div>
-                <div class="flex flex-col justify-between flex-1  mt-6">
+                <div class="flex flex-col justify-between flex-1  mt-6" style={{paddingBottom : '0'}}>
                   <nav>
                     <Popup
                       trigger={

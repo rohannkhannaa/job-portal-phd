@@ -227,7 +227,7 @@ export default function Profile({ user, type }) {
             <h3
               style={{ fontWeight: "400" }}
               className="text-xxlg leading-6 font-large text-gray-900"
-            > 
+            >
               Academic Details
             </h3>
           </div>
