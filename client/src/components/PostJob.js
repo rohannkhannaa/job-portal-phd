@@ -67,21 +67,19 @@ const history=useNavigate();
             }
           })
           .catch((err)=> console.log(err));
+          // return;
       }
-      return;
     }
-
-
     if(id===undefined){
+      console.log("yha aaya");
       setGotJobDetails(true);
     }else{
+      console.log("yha bhi aaya");
       if(Object.keys(jobDetails).length!==0){
+        console.log("yha bhi to aaya");
         setGotJobDetails(true);
       }
     }
-
-
-
 
   })
 
