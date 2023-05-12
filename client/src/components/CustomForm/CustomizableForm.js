@@ -86,7 +86,7 @@ function CustomizableForm({handleSubmit,updateForm}){
 
       const random_object={};
 
-      console.log("updateForm"+updateForm);
+      console.log("updateForm"+JSON.stringify(updateForm));
 
       if(Object.keys(updateForm).length!==0){
         console.log("i have come into update form");
@@ -97,17 +97,24 @@ function CustomizableForm({handleSubmit,updateForm}){
         setUpdateFormPublication(updateForm.fields.publication);
         setUpdateFormReference(updateForm.fields.reference);
       }
+      console.log("Here");
       return;
     }
 
     const updateFormPersonalLength=Object.keys(updateFormPersonal).length;
+    console.log("len1"+updateFormPersonalLength)
     const updateFormPublicationLength=Object.keys(updateFormPublication).length;
+    console.log("len2"+updateFormPublicationLength)
     const updateFormPorLength=Object.keys(updateFormPor).length;
+    console.log("len3"+updateFormPorLength);
     const updateFormExperienceLength=Object.keys(updateFormExperience).length;
+    console.log("len4"+updateFormExperienceLength);
     const updateFormReferenceLength=Object.keys(updateFormReference).length;
+    console.log("len5"+updateFormReferenceLength);
     const updateFormAcademicLength=Object.keys(updateFormAcademic).length;
+    console.log("len6"+updateFormAcademicLength);
 
-    console.log(updateFormAcademic);
+    console.log("Academic"+ updateFormAcademic);
 
     console.log("personal" + updateFormPersonalLength);
     console.log("publication" + updateFormPublicationLength);
