@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useState, useEffect, useRef} from "react";
-import axios from "./axios";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import "./css/PostJob.css";
@@ -33,7 +33,7 @@ function PostJob({user,type}) {
   const [lastDate,setLastDate]=useState("");
   const [jobDetails,setJobDetails]=useState({});
 
-  const [gotJobDetails,setGotJobDetails]=useState(true);
+  const [gotJobDetails,setGotJobDetails]=useState(false);
 
   const isFirstRender = useRef(true);
 
@@ -396,7 +396,10 @@ const history=useNavigate();
         </form>
       </div>
     </div>
-    <CustomizableForm handleSubmit={handleSubmit} updateForm={jobDetails}/>
+
+
+
+      {gotJobDetails && <CustomizableForm handleSubmit={handleSubmit} updateForm={jobDetails}/>}
 
 </>
   );
