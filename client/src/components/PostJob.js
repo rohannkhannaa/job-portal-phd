@@ -33,7 +33,7 @@ function PostJob({user,type}) {
   const [lastDate,setLastDate]=useState("");
   const [jobDetails,setJobDetails]=useState({});
 
-  const [gotJobDetails,setGotJobDetails]=useState(false);
+  const [gotJobDetails,setGotJobDetails]=useState(true);
 
   const isFirstRender = useRef(true);
 
