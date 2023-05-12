@@ -4,7 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 // import Box from '@mui/material/Box';
 // import CircularProgress from '@mui/material/CircularProgress';
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"; 
+import lgimage from './lgimage.jpg';
 
 const ForgotPassword = () => {
 
@@ -56,7 +57,8 @@ const ForgotPassword = () => {
                 .post(`/api/${id}/${token}/${usertype}`, { password, usertype })
                 .then((res) => {
                     setMessage(res.data.message);
-                    if (res.data.status == 201) {
+                    console.log("direct api wala hai" + res.data);
+                    if (res.data.status === 201) {
                         setPassword("");
                         setMessage(true);
                     } else {
@@ -82,9 +84,10 @@ const ForgotPassword = () => {
         <div class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
           <div className="hidden bg-cover lg:block lg:w-1/2" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80")'}}></div>
           <div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
-            <div class="flex justify-center mx-auto">
+            {/* <div class="flex justify-center mx-auto">
               <img class="w-auto h-7 sm:h-8" src="https://upload.wikimedia.org/wikipedia/en/f/f9/Indian_Institute_of_Technology_Ropar_logo.png" alt=""/>
-            </div>
+            </div> */}
+            <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: `url(${lgimage})`, backgroundSize: '100%' }}></div>
             <p class="mt-3 text-xl text-center text-gray-600 dark:text-gray-200">
                 Reset Password
             </p>
@@ -115,28 +118,8 @@ const ForgotPassword = () => {
           </div>
         </div>
 
-            {/*<section>
-                <div className="form_data">
-                    <div className="form_heading">
-                        <h1>Enter Your NEW Password</h1>
-                    </div>
-
-                    <form>
-                        {message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Succesfulyy Update </p> : ""}
-                        <div className="form_input">
-                            <label htmlFor="password">New password</label>
-                            <input type="password" value={password} onChange={setval} name="password" id="password" placeholder='Enter Your new password' />
-                        </div>
-
-                        <button className='btn' onClick={sendpassword}>Send</button>
-                    </form>
-                    <p><NavLink to="/login">Home</NavLink></p>
-                    <ToastContainer />
-                </div>
-            </section>*/}
-
         </div>
     )
 }
 
-export default ForgotPassword
+export default ForgotPassword;

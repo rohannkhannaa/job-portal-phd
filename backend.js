@@ -730,18 +730,27 @@ app.get("/validuser", authenticate, async (req, res) => {
 });
 
 // send email Link For reset Password
+// send email Link For reset Password
 app.post("/api/sendpasswordlink", async (req, res) => {
-  //console.log(req.body)
+  ////console.log(req.body)
+
+  console.log(req.body);
 
   const { email, userType } = req.body;
+
 
   if (!email) {
     res.status(401).json({ status: 401, message: "Enter Your Email" });
   }
 
   try {
-    if (userType == "student") {
+    if (userType === "student") {
       const userfind = await User.findOne({ email: email });
+
+      if(!userfind)
+      {
+         return res.status(201).send({ status: 201, message: "User not exist" });
+      }
 
       // token generate for reset password
       const token = jwt.sign({ _id: userfind._id }, keysecret, {
@@ -753,6 +762,9 @@ app.post("/api/sendpasswordlink", async (req, res) => {
         { verifytoken: token },
         { new: true }
       );
+
+      // console.log("user token : " + setusertoken);
+
       if (setusertoken) {
         const mailOptions = {
           from: "r.patidar181001.2@gmail.com",
@@ -763,13 +775,11 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            //console.log("error",error);
-            res.status(401).json({ status: 401, message: "email not send" });
+            console.log("error",error);
+            return res.status(401).send({ status: 401, message: "email not send" });
           } else {
-            //console.log("Email sent",info.response);
-            res
-              .status(201)
-              .json({ status: 201, message: "Email sent Succsfully" });
+            console.log("Email sent",info.response);
+            return res.status(201).send({ status: 201, message: "Email sent Succsfully" });
           }
         });
       }
@@ -796,10 +806,10 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            //console.log("error",error);
+            ////console.log("error",error);
             res.status(401).json({ status: 401, message: "email not send" });
           } else {
-            //console.log("Email sent",info.response);
+            ////console.log("Email sent",info.response);
             res
               .status(201)
               .json({ status: 201, message: "Email sent Succsfully" });
@@ -813,21 +823,23 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 });
 
 // verify user for forgot password time
-app.get("/forgotpassword/:id/:token/:usertype", async (req, res) => {
+app.get("/api/forgotpassword/:id/:token/:usertype", async (req, res) => {
   const { id, token, usertype } = req.params;
 
-  //console.log(usertype);
-  //console.log("link ke baad ka get pe hu");
+  console.log(usertype);
+  console.log("link ke baad ka get pe hu");
 
   try {
-    if (usertype == "student") {
-      //console.log("student hu omk ?");
+    if (usertype === "student") {
+      console.log("student hu omk ?");
 
       const validuser = await User.findOne({ _id: id, verifytoken: token });
 
+      console.log(validuser);
+
       const verifyToken = jwt.verify(token, keysecret);
 
-      //console.log(verifyToken)
+      console.log("verify Token :" + verifyToken);
 
       if (validuser && verifyToken._id) {
         res.status(201).json({ status: 201, validuser });
@@ -842,7 +854,7 @@ app.get("/forgotpassword/:id/:token/:usertype", async (req, res) => {
 
       const verifyToken = jwt.verify(token, keysecret);
 
-      //console.log(verifyToken)
+      ////console.log(verifyToken)
 
       if (validuser && verifyToken._id) {
         res.status(201).json({ status: 201, validuser });
@@ -860,11 +872,17 @@ app.get("/forgotpassword/:id/:token/:usertype", async (req, res) => {
 app.post("/api/:id/:token/:usertype", async (req, res) => {
   const { id, token, usertype } = req.params;
 
+  console.log("id" + id);
+  console.log("token" +token);
+  console.log("usertype" + usertype);
+
   const { password } = req.body;
 
+  console.log(password);
+
   try {
-    if (usertype == "student") {
-      //console.log("student after password reset");
+    if (usertype === "student") {
+      ////console.log("student after password reset");
       const validuser = await User.findOne({ _id: id, verifytoken: token });
 
       const verifyToken = jwt.verify(token, keysecret);
