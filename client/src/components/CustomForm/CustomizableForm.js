@@ -87,6 +87,7 @@ function CustomizableForm({handleSubmit,updateForm}){
       const random_object={};
 
       console.log(updateForm);
+      console.log("Yha : "+Object.keys(updateForm).length);
 
       if(Object.keys(updateForm).length!==0){
         console.log("i have come into update form");
@@ -97,9 +98,10 @@ function CustomizableForm({handleSubmit,updateForm}){
         setUpdateFormPublication(updateForm.fields.publication);
         setUpdateFormReference(updateForm.fields.reference);
       }
-      return;
+      console.log("ok");
+      // return;
     }
-
+    console.log("yha aaya");
     const updateFormPersonalLength=Object.keys(updateFormPersonal).length;
     const updateFormPublicationLength=Object.keys(updateFormPublication).length;
     const updateFormPorLength=Object.keys(updateFormPor).length;
@@ -177,6 +179,7 @@ function CustomizableForm({handleSubmit,updateForm}){
         </Button>
       </Modal.Footer>*/}
     </Modal>
+
     {gotUpdateForm &&
       <div style={{width:'75%', margin:'auto'}}>
         <form>
