@@ -39,7 +39,7 @@ function CustomizableForm({handleSubmit,updateForm}){
 
 
 
-  const [show,setShow]=useState(false);
+  const [show,setShow]=useState(true);
 
   const handleShow = ()=> setShow(true);
   const handleClose = ()=>setShow(false);
@@ -48,28 +48,28 @@ function CustomizableForm({handleSubmit,updateForm}){
 
   const collectDataPersonal = (data)=> {
     setPersonalData(data);
-    //console.log(data);
+    console.log("Yha1"+data);
   }
   const collectDataPublication = (data)=> {
     setPublicationData(data);
-    //console.log(data);
+    console.log("Yha2"+data);
   }
   const collectDataPor = (data)=> {
     setPorData(data);
-    //console.log(data);
+    console.log("Yha3"+data);
   }
   const collectDataExperience = (data)=> {
     setExperienceData(data);
-    //console.log(data);
+    console.log("Yha4"+data);
   }
   const collectDataAcademic = (data)=> {
     setAcademicData(data);
     console.log("academic data is");
-    console.log(data);
+    console.log("Yha5"+data);
   }
   const collectDataReference = (data)=> {
     setReferenceData(data);
-    //console.log(data);
+    console.log("Yha6"+data);
   }
 
   const handleDataCollection = ()=> {
@@ -86,7 +86,7 @@ function CustomizableForm({handleSubmit,updateForm}){
 
       const random_object={};
 
-      console.log(updateForm);
+      console.log("updateForm"+updateForm);
 
       if(Object.keys(updateForm).length!==0){
         console.log("i have come into update form");

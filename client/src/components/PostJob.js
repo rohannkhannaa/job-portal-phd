@@ -48,7 +48,9 @@ const history=useNavigate();
       isFirstRender.current=false;
 
       if(id!==undefined){
-        axios.get(`/updateJob/${id}`)
+        axios.get(`/updateJob/${id}`, {
+          withCredentials: true
+        })
           .then((response)=>{
             if(response.data.status===200){
               const jobDetails=response.data.job;
