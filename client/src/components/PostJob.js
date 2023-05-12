@@ -397,7 +397,7 @@ const history=useNavigate();
       </div>
     </div>
 
-
+{console.log("Here"+gotJobDetails)}
 
       {gotJobDetails && <CustomizableForm handleSubmit={handleSubmit} updateForm={jobDetails}/>}
 
