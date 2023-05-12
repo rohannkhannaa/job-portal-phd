@@ -32,12 +32,18 @@ route.post("/resume-upload/:id", upload.single("resume"), async (req, res) => {
   try {
     const {id} = req.params;
     const buffer = req.file.buffer;
+    console.log(buffer);
+    console.log(id);
+    console.log("Yha1");
     const PDFParserModule = await import("pdf2json");
+    console.log("Yha1");
     const PDFParser = PDFParserModule.default;
+    console.log("Yha2");
     const parser = new PDFParser();
+    console.log("Yha 3");
     parser.on("pdfParser_dataReady", async (pdfData) => {
       const text = pdfData.Pages[0].Texts.map((t) => t.R[0].T).join("\n");
-      // console.log(text);
+      console.log("yha4"+text);
       let class10Marks = null;
       let class12Marks = null;
       let class10Start = null;
