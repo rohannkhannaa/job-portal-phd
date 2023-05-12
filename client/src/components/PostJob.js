@@ -396,10 +396,10 @@ const history=useNavigate();
         </form>
       </div>
     </div>
-
+<h1>Acha bhai</h1>
 {console.log("Here"+gotJobDetails)}
 
-      {gotJobDetails && <CustomizableForm handleSubmit={handleSubmit} updateForm={jobDetails}/>}
+      <CustomizableForm handleSubmit={handleSubmit} updateForm={jobDetails}/>
 
 </>
   );
