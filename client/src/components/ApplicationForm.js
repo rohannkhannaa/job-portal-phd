@@ -230,7 +230,7 @@ function submitClicked(){
       console.log("did i come here");
       isFirstRender.current=false;
       getDetails();
-      return;
+      // return;
     }
     //console.log("srni");
 
