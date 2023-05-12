@@ -39,7 +39,7 @@ function CustomizableForm({handleSubmit,updateForm}){
 
 
 
-  const [show,setShow]=useState(true);
+  const [show,setShow]=useState(false);
 
   const handleShow = ()=> setShow(true);
   const handleClose = ()=>setShow(false);
@@ -48,28 +48,28 @@ function CustomizableForm({handleSubmit,updateForm}){
 
   const collectDataPersonal = (data)=> {
     setPersonalData(data);
-    console.log("Yha1"+data);
+    //console.log(data);
   }
   const collectDataPublication = (data)=> {
     setPublicationData(data);
-    console.log("Yha2"+data);
+    //console.log(data);
   }
   const collectDataPor = (data)=> {
     setPorData(data);
-    console.log("Yha3"+data);
+    //console.log(data);
   }
   const collectDataExperience = (data)=> {
     setExperienceData(data);
-    console.log("Yha4"+data);
+    //console.log(data);
   }
   const collectDataAcademic = (data)=> {
     setAcademicData(data);
     console.log("academic data is");
-    console.log("Yha5"+data);
+    console.log(data);
   }
   const collectDataReference = (data)=> {
     setReferenceData(data);
-    console.log("Yha6"+data);
+    //console.log(data);
   }
 
   const handleDataCollection = ()=> {
@@ -86,7 +86,7 @@ function CustomizableForm({handleSubmit,updateForm}){
 
       const random_object={};
 
-      console.log("updateForm"+JSON.stringify(updateForm));
+      console.log(updateForm);
 
       if(Object.keys(updateForm).length!==0){
         console.log("i have come into update form");
@@ -97,24 +97,17 @@ function CustomizableForm({handleSubmit,updateForm}){
         setUpdateFormPublication(updateForm.fields.publication);
         setUpdateFormReference(updateForm.fields.reference);
       }
-      console.log("Here");
       return;
     }
 
     const updateFormPersonalLength=Object.keys(updateFormPersonal).length;
-    console.log("len1"+updateFormPersonalLength)
     const updateFormPublicationLength=Object.keys(updateFormPublication).length;
-    console.log("len2"+updateFormPublicationLength)
     const updateFormPorLength=Object.keys(updateFormPor).length;
-    console.log("len3"+updateFormPorLength);
     const updateFormExperienceLength=Object.keys(updateFormExperience).length;
-    console.log("len4"+updateFormExperienceLength);
     const updateFormReferenceLength=Object.keys(updateFormReference).length;
-    console.log("len5"+updateFormReferenceLength);
     const updateFormAcademicLength=Object.keys(updateFormAcademic).length;
-    console.log("len6"+updateFormAcademicLength);
 
-    console.log("Academic"+ updateFormAcademic);
+    console.log(updateFormAcademic);
 
     console.log("personal" + updateFormPersonalLength);
     console.log("publication" + updateFormPublicationLength);
@@ -164,7 +157,7 @@ function CustomizableForm({handleSubmit,updateForm}){
                 Cancel
             </button>
 
-            <button onClick={handleDataCollection} class="px-4 sm:mx-2 w-full py-2.5 sm:mt-0 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
+            <button onClick={handleDataCollection} class="px-4 sm:mx-2 w-full py-2.5 sm:mt-0 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-md hover:bg-green-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
                 Post
             </button>
         </div>
