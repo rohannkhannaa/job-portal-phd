@@ -61,24 +61,26 @@ function App({ user, type }) {
         "Accept": "application/json"
       },
       withCredentials: true
+    }).then((response)=>{
+      console.log("after logout");
+
+      const data = response.data;
+  
+      console.log(data);
+  
+      if (data.status == 201) {
+        console.log("user logout");
+        localStorage.removeItem("usersdatatoken");
+  
+        window.location.href = "/";
+  
+      } else {
+        console.log("error");
+      }
     }).catch(e => {
       console.log(e);
   });;
-    console.log("after logout");
-
-    const data = res.data;
-
-    console.log(data);
-
-    if (data.status == 201) {
-      console.log("user logout");
-      localStorage.removeItem("usersdatatoken");
-
-      window.location.href = "/";
-
-    } else {
-      console.log("error");
-    }
+   
   }
 
 
