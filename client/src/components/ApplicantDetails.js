@@ -365,7 +365,9 @@ function ApplicantDetails({ user, type }) {
                                 {/* <button onClick={openPDF}>Open PDF</button> */}
                               </>
                             ) : (
-                              <></>
+                              <>
+                              Not uploaded by student
+                              </>
                             )}
                           </td>
                         </tr>
@@ -915,7 +917,7 @@ function ApplicantDetails({ user, type }) {
               paddingTop: "50px",
               paddingBottom: "50px",
               marginBottom: "50px",
-              backgroundColor: "#87CEEB",
+              backgroundColor: "rgba(178, 195, 212, 1)",
             }}
           >
             <div class="flex items-center gap-x-3" style={{ width: "100%" }}>
@@ -1724,7 +1726,7 @@ function ApplicantDetails({ user, type }) {
               paddingTop: "50px",
               paddingBottom: "50px",
               marginBottom: "50px",
-              backgroundColor: "#87CEEB",
+              backgroundColor: "rgba(178, 195, 212, 1)",
             }}
           >
             <div class="flex items-center gap-x-3" style={{ width: "100%" }}>
@@ -1902,7 +1904,7 @@ function ApplicantDetails({ user, type }) {
               paddingTop: "50px",
               paddingBottom: "50px",
               marginBottom: "50px",
-              backgroundColor: "#87CEEB",
+              backgroundColor: "rgba(178, 195, 212, 1)",
             }}
           >
             <div class="flex items-center gap-x-3" style={{ width: "100%" }}>
@@ -2112,7 +2114,7 @@ function ApplicantDetails({ user, type }) {
               paddingTop: "50px",
               paddingBottom: "50px",
               marginBottom: "50px",
-              backgroundColor: "#87CEEB",
+              backgroundColor: "rgba(178, 195, 212, 1)",
             }}
           >
             <div class="flex items-center gap-x-3" style={{ width: "100%" }}>
@@ -2291,7 +2293,7 @@ function ApplicantDetails({ user, type }) {
               paddingTop: "50px",
               paddingBottom: "50px",
               marginBottom: "50px",
-              backgroundColor: "#87CEEB",
+              backgroundColor: "rgba(178, 195, 212, 1)",
             }}
           >
             <div class="flex items-center gap-x-3" style={{ width: "100%" }}>
