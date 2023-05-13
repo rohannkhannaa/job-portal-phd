@@ -416,7 +416,60 @@ app.post("/api/verifyOtp", async (req, res) => {
       await personals.save();
       await user.save();
       await otherdetails.save();
+      const experience = new UserExperience({
+        email: email,
+        profile: "-",
+        organization: "-",
+        startdate: today,
+        enddate: today,
+        description: "-",
+        location: "-",
+      });
+      experience.save();
 
+      const publication = new Publication({
+        email: email,
+        title: '-',
+        authorlist: [
+          {
+            author: '-',
+            author_id: '-',
+          }
+        ],
+        abstract: '-',
+        journal: '-',
+        volume: '-',
+        pages: '-',
+        publisher: '-',
+        doi: '-',
+        url: '-',
+      });
+      publication.save();
+
+
+      const por = new POR({
+        email: email,
+        title: '-',
+        organization: '-',
+        location: '-',
+        startdate: today,
+        enddate: today,
+        description: '-',
+      });
+      por.save();
+
+
+      const reference = new Reference({
+        email: email,
+        name: '-',
+        title: '-',
+        affliliation: '-',
+        referenceemail: '-',
+        referencephone: '-',
+        relationship: '-',
+        description: '-',
+      });
+      reference.save();
     } else {
       const userInstitute = new UserInstitute({
         name: name,
