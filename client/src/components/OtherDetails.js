@@ -5,6 +5,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { FaTrash } from "react-icons/fa";
 
 function FileUpload({ user, type }) {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
   const [isEditMode, setIsEditMode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -70,7 +71,6 @@ function FileUpload({ user, type }) {
   });
   return (
     <div className="userProfile">
-      {pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`}
       <div className="parent" style={{ marginLeft: "3rem" }}>
         {isMobile ? (<></>) :(<div className="left">
           <h3
