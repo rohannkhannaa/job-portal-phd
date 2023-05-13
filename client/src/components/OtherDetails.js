@@ -4,6 +4,22 @@ import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import { FaTrash } from "react-icons/fa";
 
 function FileUpload({ user, type }) {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [resume, setResume] = useState(null);
   const [mainResume, setMainResume] = useState(null);
   function convertToBase64(e) {
@@ -54,14 +70,14 @@ function FileUpload({ user, type }) {
   return (
     <div className="userProfile">
       <div className="parent" style={{ marginLeft: "3rem" }}>
-        <div className="left">
+        {isMobile ? (<></>) :(<div className="left">
           <h3
             style={{ fontWeight: "400" }}
             className="text-xxlg leading-6 font-large text-gray-900"
           >
             Resume Manager
           </h3>
-        </div>
+        </div>)}
       </div>
       <hr />
       <div style={{ display: "flex" }}>

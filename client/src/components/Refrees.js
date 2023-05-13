@@ -4,6 +4,22 @@ import "./css/Personal.css";
 import { FaTrash, FaEdit, FaPen } from "react-icons/fa";
 import noDataImage from "./NotFound.jpg";
 const ExperienceTable = ({ user, type }) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const bottomRef = useRef(null);
   const [references, setReferences] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -123,14 +139,14 @@ const ExperienceTable = ({ user, type }) => {
         className="userProfile"
       >
         <div className="parent" style={{ marginLeft: "3rem" }}>
-          <div className="left">
+          {isMobile ? (<></>) :(<div className="left">
             <h3
               style={{ fontWeight: "400" }}
               className="text-xxlg leading-6 font-large text-gray-900"
             >
               References
             </h3>
-          </div>
+          </div>)}
           <div className="right">
             <button className="addNewButton" onClick={handleAdd}>
               Add Reference

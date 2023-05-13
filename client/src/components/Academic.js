@@ -223,14 +223,14 @@ export default function Profile({ user, type }) {
     <>
       <div className="userProfile">
         <div className="parent" style={{ marginLeft: isMobile ? '0rem': "2rem" , paddingLeft : isMobile ? '0rem' : ''}}>
-          <div className="left">
+          {isMobile ? (<></>) : (<div className="left">
             <h3
               style={{ fontWeight: "400" }}
               className="text-xxlg leading-6 font-large text-gray-900"
             >
               Academic Details
             </h3>
-          </div>
+          </div>)}
         </div>
         <hr
           style={{ marginLeft: isMobile ? '0rem':"2rem", borderWidth: "1px", width: "17rem" }}
