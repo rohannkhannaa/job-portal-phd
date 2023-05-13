@@ -59,6 +59,9 @@ export default function Profile({ user, type }) {
   const history = useNavigate();
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
+    if(isMobile){
+      setRenderSideNav(false);
+    }
     console.log(activeComponent);
   };
 
