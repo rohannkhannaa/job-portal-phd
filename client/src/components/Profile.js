@@ -323,6 +323,7 @@ export default function Profile({ user, type }) {
                   <>
                     <button
                     style={{
+                      border : '1px solid grey',
                       width : '100%',
                       margin : '0',
                       padding : '0.2rem',
@@ -332,7 +333,7 @@ export default function Profile({ user, type }) {
                         setRenderSideNav(false);
                       }}
                     >
-                      Hide
+                      Hide 🔼
                     </button>
 
                     <div className="outer-container">
@@ -573,16 +574,17 @@ export default function Profile({ user, type }) {
                   <>
                     <button
                     style={{
+                      border : '1px solid grey',
                       width : '100%',
                       margin : '0',
-                      padding : '0.2rem',
+                      padding : '0.7rem',
                       marginTop : '1rem',
                     }}
                       onClick={() => {
                         setRenderSideNav(true);
                       }}
                     >
-                      Show more
+                      Show more 🔽
                     </button>
                   </>
                 )}
