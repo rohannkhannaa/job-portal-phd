@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "./axios";
 import { Document, Page, pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 import { FaTrash } from "react-icons/fa";
 
@@ -71,6 +70,7 @@ function FileUpload({ user, type }) {
   });
   return (
     <div className="userProfile">
+      {pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`}
       <div className="parent" style={{ marginLeft: "3rem" }}>
         {isMobile ? (<></>) :(<div className="left">
           <h3
