@@ -9,9 +9,7 @@
 .userProfileData {
   flex: 1;
 }
-hr{
-  width : '20rem'
-}
+
 .userProfileData table {
   font-size: medium;
   /* font-weight: 500; */
