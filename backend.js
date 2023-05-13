@@ -1145,7 +1145,7 @@ app.post("/jobApplicantStatusChange", async (req, res) => {
         from: "r.patidar181001.2@gmail.com",
         to: student_email,
         subject: "Status Change",
-        text: ` <div style="background-color : #E8F5FF; width : max-content; padding : 2rem; content-align : center">
+        html: ` <div style="background-color : #E8F5FF; width : max-content; padding : 2rem; content-align : center">
         <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
           <div style="margin:1px 1px;width: max-content;padding:1rem 1rem">
             <div style="border-bottom:1px solid #eee">
