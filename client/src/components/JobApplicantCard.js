@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container } from "react-bootstrap";
 import './css/JobCard.css';
-import axios from 'axios';
+import axios from './axios';
 import {useState,useEffect} from "react";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate , useLocation } from 'react-router-dom';
