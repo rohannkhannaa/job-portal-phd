@@ -356,9 +356,11 @@ function ApplicantDetails({ user, type }) {
                             class="px-4 py-3 text-sm text-gray-500 dark:text-gray-300 whitespace-normal"
                             style={{ display: "block", borderLeftWidth: "1px" }}
                           >
-                                <a href={resume} download>
+                                {resume ? (<a href={resume} download>
                                   Download PDF
-                                </a>
+                                </a>):(
+                                  <p>Not uploaded yet</p>
+                                )}
 
                           </td>
                         </tr>
