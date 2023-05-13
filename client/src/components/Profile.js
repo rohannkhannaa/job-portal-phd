@@ -324,113 +324,20 @@ export default function Profile({ user, type }) {
                     <button
                     style={{
                       border : '1px solid #ecdede',
-                      width : '90%',
+                      width : '100%',
                       margin : '0',
                       padding : '0.7rem',
-                      marginTop : '1rem',
+                      marginTop : '2rem',
                     }}
                       onClick={() => {
                         setRenderSideNav(false);
                       }}
                     >
-                      Hide 🔼
+                      Hide 
                     </button>
 
                     <div className="outer-container">
                       <aside class="flex flex-col w-200 h-screen px-7 py-2 bg-white   rtl:border-2 dark:bg-gray-100 dark:border-gray-200">
-                        <div style={{ marginLeft: "1rem" }}>
-                          <div class="relative mt-9">
-                            <div
-                              style={{
-                                position: "relative",
-                                display: "inline-block",
-                                // opacity: isHovered ? 0.4 : 1,
-                                // marginLeft: "1rem",
-                              }}
-                              onMouseEnter={handleMouseEnter}
-                              onMouseLeave={handleMouseLeave}
-                            >
-                              <img
-                                src={altProfile}
-                                // src={ProfileSettingsImage}
-                                className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
-                                alt={defaultImage}
-                                style={{
-                                  width: "200px",
-                                  height: "200px",
-                                  borderRadius: "50%",
-                                  padding: "0",
-                                  margin: "0",
-                                  marginBottom: "1rem",
-                                  opacity: isHovered ? "0.5" : "",
-                                }}
-                              />
-                              {isHovered && (
-                                <Popup
-                                  trigger={
-                                    <button
-                                      style={{
-                                        position: "absolute",
-                                        top: "50%",
-                                        left: "50%",
-                                        color: "white",
-                                        transform: "translate(-50%, -50%)",
-                                        background: "gray",
-                                        border: "1px solid white",
-                                        padding: "5px",
-                                        zIndex: "1rem",
-                                        borderRadius: "5rem",
-                                        width: "100%",
-                                      }}
-                                      onClick={() => setPopUpImageForm(true)}
-                                    >
-                                      Edit
-                                    </button>
-                                  }
-                                  modal
-                                  closeOnDocumentClick
-                                  overlayStyle={{
-                                    background: "rgba(0, 0, 0, 0.7)",
-                                    zIndex: 1000,
-                                  }}
-                                  contentStyle={{
-                                    width: "45%",
-                                    height: "45%",
-                                    padding: "0",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
-                                    backgroundColor: "#fff",
-                                  }}
-                                >
-                                  {(close) => (
-                                    <>
-                                      <ImageUploader
-                                        user={user}
-                                        type={type}
-                                        onClose={close}
-                                      />
-                                    </>
-                                  )}
-                                </Popup>
-                              )}
-                            </div>
-                          </div>
-                          <p
-                            style={{
-                              fontWeight: "550",
-                              fontSize: "1rem",
-                              // marginLeft: "1rem",
-                              width: "100%",
-                              textDecoration: "underline",
-                            }}
-                            class="px-8"
-                          >
-                            {name}
-                          </p>
-                        </div>
                         <div
                           class="flex flex-col justify-between flex-1  mt-6"
                           style={{ paddingBottom: "0" }}

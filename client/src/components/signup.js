@@ -22,7 +22,7 @@ const Signup = () => {
 
     const handleSendOtp = () => {
 
-        if(!email.includes('.ac.in') && !email.includes('.edu'))
+        if(userType=== "institute" && !email.includes('.ac.in') && !email.includes('.edu') )
         {
             alert("If not .ac.in or .edu then please fill the form and wait");
         }
