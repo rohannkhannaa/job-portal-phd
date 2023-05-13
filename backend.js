@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require('dotenv').config();
+require("dotenv").config();
 const { connect } = require("mongoose");
 const mongoose = require("mongoose");
 const { urlencoded, json } = require("body-parser");
@@ -22,18 +22,18 @@ const Reference = require("./model/referenceSchema");
 const UserExperience = require("./model/experienceSchema");
 const OtherDetail = require("./model/otherDetailSchema");
 const POR = require("./model/porSchema");
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const excelJs = require("exceljs");
 const xl = require("excel4node");
 const mime = require("mime");
 const path = require("path");
-const DB_URL = process.env.MONGO_DB_URL ;
-const corsOptions ={
-  origin:process.env.REACT_APP_API_KEY, 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
+const DB_URL = process.env.MONGO_DB_URL;
+const corsOptions = {
+  origin: process.env.REACT_APP_API_KEY,
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 app.use(cors(corsOptions));
 app.use(cookiParser());
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -80,7 +80,6 @@ const RegisterInstitute = models.RegisterInstitute;
 const Admin = models.Admin;
 // const RegisterInstitute = models.RegisterInstitute;
 
-
 let personalSchemaobj = Personal.schema.obj;
 let academicSchemaobj = Academic.schema.obj;
 let experienceSchemaobj = UserExperience.schema.obj;
@@ -94,7 +93,6 @@ delete porSchemaobj.email;
 delete publicationSchemaobj.email;
 delete referenceSchemaobj.email;
 
-
 const applicationSchema = new mongoose.Schema({
   student_id: String,
   job_id: String,
@@ -105,9 +103,9 @@ const applicationSchema = new mongoose.Schema({
     experience: [Object],
     publication: [Object],
     por: [Object],
-    reference: [Object]
+    reference: [Object],
   },
-  application_date:String,
+  application_date: String,
 });
 const Application = mongoose.model("application", applicationSchema);
 // Getting collections from database
@@ -120,17 +118,17 @@ app.post("/job-post", (req, res) => {
   console.log(req.body.job);
   const { job, id } = req.body;
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
 
-  today = yyyy + '-' + mm + '-' + dd;
+  today = yyyy + "-" + mm + "-" + dd;
   console.log(job);
   console.log("the job fields are:");
   console.log(job.fields);
   var obj = {};
   obj = job;
-  obj.createdAt=today;
+  obj.createdAt = today;
   obj.institute_id = id;
   console.log(obj);
   const postJob = new Job(obj);
@@ -192,7 +190,7 @@ app.get("/api/job-details/:id/:student_id", async (req, res) => {
         status: 200,
         job: job,
         applied: applied,
-        application_id: application_id
+        application_id: application_id,
       });
     }
   } catch (err) {
@@ -218,15 +216,15 @@ app.post("/api/sendOtp", async (req, res) => {
 
   console.log(userType);
 
-  let user = await User.findOne({ email });  // finsding user in student
+  let user = await User.findOne({ email }); // finsding user in student
   if (user) {
     console.log("i m hetyfiuwbri");
     console.log(user);
     return res
       .status(200)
       .send({ status: 400, message: "User already exists" });
-  }
-  else if (!user) { // finding user in institute
+  } else if (!user) {
+    // finding user in institute
     user = await UserInstitute.findOne({ email });
     if (user) {
       return res
@@ -248,29 +246,25 @@ app.post("/api/sendOtp", async (req, res) => {
 
   // req.session.otp = otp;
 
-
   const mailOptions = {
     from: "r.patidar181001.2@gmail.com",
     to: email,
     subject: "OTP for login",
     html: `
+    <div style="background-color : #E8F5FF; width : max-content; padding : 2rem; content-align : center">
     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-  <div style="margin:50px auto;width:70%;padding:20px 0">
-    <div style="border-bottom:1px solid #eee">
-      <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">PHD Job Portal</a>
+      <div style="margin:1px 1px;width: max-content;padding:1rem 1rem">
+        <div style="border-bottom:1px solid #eee">
+          <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">PHD Job Portal</a>
+        </div>
+        <p style="font-size:1.1em">Hi,</p>
+        <p>Thank you for signing up. Use the following OTP to complete your Sign Up procedures.</p>
+        <h2 style="background: transparent;width: max-content;padding: 0 10px;border : 0.1px solid #00466a;color: #fff;border-radius: 4px; color : #00466a">${otp}</h2>
+        <p style="font-size:0.9em;">Regards,<br />Job Portal</p>
+        <hr style="border:none;border-top:1px solid #eee" />
+      </div>
     </div>
-    <p style="font-size:1.1em">Hi,</p>
-    <p>Thank you for signing up. Use the following OTP to complete your Sign Up procedures.</p>
-    <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
-    <p style="font-size:0.9em;">Regards,<br />Job Portal</p>
-    <hr style="border:none;border-top:1px solid #eee" />
-    <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-      <p>PHD Job Portal</p>
-      <p>IIT Ropar</p>
-      <p>(DEP T18)</p>
     </div>
-  </div>
-</div>
     `,
   };
 
@@ -286,7 +280,7 @@ app.post("/api/sendOtp", async (req, res) => {
       return res.status(200).send({
         status: 200,
         message: "OTP sent",
-        otp: otp
+        otp: otp,
       });
     }
   });
@@ -312,7 +306,6 @@ app.post("/api/verifyOtp", async (req, res) => {
   // console.log(req.session);
 
   //console.log(req.body.userType);
-
 
   // if (otpEntered === -1) {
   //   const userInstitute = new UserInstitute({
@@ -340,11 +333,11 @@ app.post("/api/verifyOtp", async (req, res) => {
         password: hashedPassword,
       });
       var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
       var yyyy = today.getFullYear();
 
-      today = yyyy + '-' + mm + '-' + dd;
+      today = yyyy + "-" + mm + "-" + dd;
 
       const personals = new Personal({
         email: email,
@@ -363,7 +356,7 @@ app.post("/api/verifyOtp", async (req, res) => {
         communication_city: "-",
         communication_state: "-",
         communication_pincode: "-",
-        profile_image_url : "#",
+        profile_image_url: "#",
         permanent_address: "-",
         permanent_city: "-",
         permanent_state: "-",
@@ -375,43 +368,43 @@ app.post("/api/verifyOtp", async (req, res) => {
       });
       const academics = new Academic({
         email: email,
-        board10: '-',
-        percentageformat10: '-',
-        percentage10: '-',
-        year10: '-',
-        remarks10: '-',
-        marksheet10: '-',
+        board10: "-",
+        percentageformat10: "-",
+        percentage10: "-",
+        year10: "-",
+        remarks10: "-",
+        marksheet10: "-",
 
-        board12: '-',
-        percentageformat12: '-',
-        percentage12: '-',
-        year12: '-',
-        remarks12: '-',
-        marksheet12: '-',
+        board12: "-",
+        percentageformat12: "-",
+        percentage12: "-",
+        year12: "-",
+        remarks12: "-",
+        marksheet12: "-",
 
-        collegebtech: '-',
-        branchbtech: '-',
-        percentageformatbtech: '-',
-        percentagebtech: '-',
-        yearbtech: '-',
-        remarksbtech: '-',
-        marksheetbtechurl: '-',
+        collegebtech: "-",
+        branchbtech: "-",
+        percentageformatbtech: "-",
+        percentagebtech: "-",
+        yearbtech: "-",
+        remarksbtech: "-",
+        marksheetbtechurl: "-",
 
-        collegemtech: '-',
-        branchmtech: '-',
-        percentageformatmtech: '-',
-        percentagemtech: '-',
-        yearmtech: '-',
-        remarksmtech: '-',
-        marksheetmtech: '-',
+        collegemtech: "-",
+        branchmtech: "-",
+        percentageformatmtech: "-",
+        percentagemtech: "-",
+        yearmtech: "-",
+        remarksmtech: "-",
+        marksheetmtech: "-",
 
-        isphdcompleted: '-',
-        phdremarks: '-',
+        isphdcompleted: "-",
+        phdremarks: "-",
       });
       const otherdetails = new OtherDetail({
-        email : email,
-        resume_url : '#',
-      })
+        email: email,
+        resume_url: "#",
+      });
       await academics.save();
       await personals.save();
       await user.save();
@@ -429,45 +422,43 @@ app.post("/api/verifyOtp", async (req, res) => {
 
       const publication = new Publication({
         email: email,
-        title: '-',
+        title: "-",
         authorlist: [
           {
-            author: '-',
-            author_id: '-',
-          }
+            author: "-",
+            author_id: "-",
+          },
         ],
-        abstract: '-',
-        journal: '-',
-        volume: '-',
-        pages: '-',
-        publisher: '-',
-        doi: '-',
-        url: '-',
+        abstract: "-",
+        journal: "-",
+        volume: "-",
+        pages: "-",
+        publisher: "-",
+        doi: "-",
+        url: "-",
       });
       publication.save();
 
-
       const por = new POR({
         email: email,
-        title: '-',
-        organization: '-',
-        location: '-',
+        title: "-",
+        organization: "-",
+        location: "-",
         startdate: today,
         enddate: today,
-        description: '-',
+        description: "-",
       });
       por.save();
 
-
       const reference = new Reference({
         email: email,
-        name: '-',
-        title: '-',
-        affliliation: '-',
-        referenceemail: '-',
-        referencephone: '-',
-        relationship: '-',
-        description: '-',
+        name: "-",
+        title: "-",
+        affliliation: "-",
+        referenceemail: "-",
+        referencephone: "-",
+        relationship: "-",
+        description: "-",
       });
       reference.save();
     } else {
@@ -494,7 +485,6 @@ app.post("/api/verifyOtp", async (req, res) => {
 });
 
 app.post("/api/add-institute", async (req, res) => {
-
   let info = req.body;
   const password = "root";
   const check = await UserInstitute.findOne({
@@ -522,7 +512,19 @@ app.post("/api/add-institute", async (req, res) => {
     from: "r.patidar181001.2@gmail.com",
     to: info.email,
     subject: "Registration on PhD Job Platform ",
-    text: `You are registered successfully on our Platform. Your default password is 'root' , kindly change it by clicking on forget password`,
+    html: `
+    <div style="background-color : #E8F5FF; width : max-content; padding : 2rem; content-align : center">
+    <p style="font-weight : 700;">Hi ${info.email}</p>
+    <p>You are successfully registered on our platform.</p>
+    <p>Use theese credentials to login.</p>
+    <p style="font-weight : 700"><span style="margin-left : 1rem"></span> Email    : ${info.email}</p>
+    <p style="font-weight : 700"><span style="margin-left : 1rem"></span>Password     : root</p>
+    <p>You may change it using forget password feature.</p>
+    <p>Have a nice day !</p>
+    <p>~PHD Job Portal</p>
+    <p>~IIT Ropar</p>
+    </div>
+    `,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -540,7 +542,6 @@ app.post("/api/add-institute", async (req, res) => {
       });
     }
   });
-
 });
 
 app.post("/api/login", async (req, res) => {
@@ -553,9 +554,9 @@ app.post("/api/login", async (req, res) => {
     });
     console.log("login m aa gya");
     // console.log(userstudent);
-    
+
     //   //console.log(res.data);
-    if (!userstudent){
+    if (!userstudent) {
       return res.status(400).send({
         success: false,
         message: "Invalid Email or Password",
@@ -649,8 +650,7 @@ app.post("/api/login", async (req, res) => {
       //   result : result
       // });
     }
-  }
-  else {
+  } else {
     console.log("admin");
     const useradmin = await Admin.findOne({
       email: email,
@@ -660,9 +660,7 @@ app.post("/api/login", async (req, res) => {
         success: false,
         message: "Invalid Email or Password",
       });
-    }
-    else {
-
+    } else {
       if (useradmin.password === password) {
         const token = await useradmin.generateAuthToken();
 
@@ -676,19 +674,18 @@ app.post("/api/login", async (req, res) => {
         };
 
         res.status(201).json({ status: 201, result });
-
       }
     }
   }
 });
 
-
 passport.use(
   new GoogleStrategy(
     {
-      clientID: '82066739900-rqo1gjofhmv4lqarkt82sr30nm8383pb.apps.googleusercontent.com', // Replace with your Google client ID
-      clientSecret: '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', // Replace with your Google client secret
-      callbackURL: '/auth/google/callback', // Replace with your callback URL
+      clientID:
+        "82066739900-rqo1gjofhmv4lqarkt82sr30nm8383pb.apps.googleusercontent.com", // Replace with your Google client ID
+      clientSecret: "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", // Replace with your Google client secret
+      callbackURL: "/auth/google/callback", // Replace with your callback URL
     },
     async (accessToken, refreshToken, profile, done) => {
       // Use the profile information to create or authenticate a user in your application
@@ -712,50 +709,69 @@ passport.use(
   )
 );
 
-
 // Initialize Passport
 app.use(passport.initialize());
 
 // Route for starting the Google authentication process
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
 // Callback route for handling the Google authentication callback
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  // Redirect to the appropriate page after successful authentication
-  res.redirect('/dashboard'); // Replace with your appropriate redirect URL
-});
-
-
-
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    // Redirect to the appropriate page after successful authentication
+    res.redirect("/dashboard"); // Replace with your appropriate redirect URL
+  }
+);
 
 // user valid
 app.get("/validuser", authenticate, async (req, res) => {
   console.log(req);
   try {
-    
     let ValidUserOne = await User.findOne({ _id: req.userId });
 
     if (ValidUserOne) {
-      res.status(201).json({ status: 201, message:"success", ValidUserOne, userType: "student" });
-    }
-    else if (!ValidUserOne) {
+      res
+        .status(201)
+        .json({
+          status: 201,
+          message: "success",
+          ValidUserOne,
+          userType: "student",
+        });
+    } else if (!ValidUserOne) {
       ValidUserOne = await UserInstitute.findOne({ _id: req.userId });
       if (ValidUserOne) {
-        res.status(201).json({ status: 201, message:"success", ValidUserOne, userType: "institute" });
-      }
-      else
-      {
+        res
+          .status(201)
+          .json({
+            status: 201,
+            message: "success",
+            ValidUserOne,
+            userType: "institute",
+          });
+      } else {
         ValidUserOne = await Admin.findOne({ _id: req.userId });
-      res.status(201).json({ status: 201, message:"success", ValidUserOne, userType: "admin" });
+        res
+          .status(201)
+          .json({
+            status: 201,
+            message: "success",
+            ValidUserOne,
+            userType: "admin",
+          });
       }
     }
 
-    if(!ValidUserOne) 
-    {
-      res.status(201).json({ status: 201, message:"failed", ValidUserOne, userType: "NA" });
+    if (!ValidUserOne) {
+      res
+        .status(201)
+        .json({ status: 201, message: "failed", ValidUserOne, userType: "NA" });
     }
-    
-
 
     // if (!ValidUserOne) {
     //   ValidUserOne = await UserInstitute.findOne({ _id: req.userId });
@@ -791,7 +807,6 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 
   const { email, userType } = req.body;
 
-
   if (!email) {
     res.status(401).json({ status: 401, message: "Enter Your Email" });
   }
@@ -800,9 +815,8 @@ app.post("/api/sendpasswordlink", async (req, res) => {
     if (userType === "student") {
       const userfind = await User.findOne({ email: email });
 
-      if(!userfind)
-      {
-         return res.status(201).send({ status: 201, message: "User not exist" });
+      if (!userfind) {
+        return res.status(201).send({ status: 201, message: "User not exist" });
       }
 
       // token generate for reset password
@@ -828,11 +842,15 @@ app.post("/api/sendpasswordlink", async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            console.log("error",error);
-            return res.status(401).send({ status: 401, message: "email not send" });
+            console.log("error", error);
+            return res
+              .status(401)
+              .send({ status: 401, message: "email not send" });
           } else {
-            console.log("Email sent",info.response);
-            return res.status(201).send({ status: 201, message: "Email sent Succsfully" });
+            console.log("Email sent", info.response);
+            return res
+              .status(201)
+              .send({ status: 201, message: "Email sent Succsfully" });
           }
         });
       }
@@ -926,7 +944,7 @@ app.post("/api/:id/:token/:usertype", async (req, res) => {
   const { id, token, usertype } = req.params;
 
   console.log("id" + id);
-  console.log("token" +token);
+  console.log("token" + token);
   console.log("usertype" + usertype);
 
   const { password } = req.body;
@@ -980,12 +998,11 @@ app.post("/api/:id/:token/:usertype", async (req, res) => {
   }
 });
 
-app.get("/logout", authenticate, async (req, res) => { 
-  
+app.get("/logout", authenticate, async (req, res) => {
   console.log("sjbfouwbgro");
   try {
     req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
-      return curelem.token !== req.token; 
+      return curelem.token !== req.token;
     });
 
     console.log("logout me aa rha");
@@ -994,14 +1011,12 @@ app.get("/logout", authenticate, async (req, res) => {
 
     req.rootUser.save();
 
-    
-
     console.log("save ho rha");
     // console.log(rootUser);
 
-    res.status(201).send({ status: 201, message : "success" });
+    res.status(201).send({ status: 201, message: "success" });
   } catch (error) {
-    res.status(401).send({status:401,message : "failed",error})
+    res.status(401).send({ status: 401, message: "failed", error });
   }
 });
 
@@ -1041,7 +1056,7 @@ app.get("/api/jobStatus/:id", async (req, res) => {
         obj.application_status = await application.status;
         obj.deleted = await job.deleted;
         obj.application_id = await application._id;
-        obj.application_date=await application.application_date;
+        obj.application_date = await application.application_date;
         return obj;
       })
     ).then((applicationArray) => {
@@ -1067,7 +1082,7 @@ app.get("/jobPostings/:id", async (req, res) => {
         obj._id = await job._id;
         obj.createdAt = await job.createdAt;
         obj.deleted = await job.deleted;
-        obj.updatedAt=await job.lastUpdateDate;
+        obj.updatedAt = await job.lastUpdateDate;
         return obj;
       })
     ).then((jobArray) => {
@@ -1095,11 +1110,12 @@ app.get("/jobApplicants/:id", async (req, res) => {
         if (student) {
           obj.application_id = await application._id;
           obj.student_name = await application.student_details.personal[0].name;
-          obj.student_email = await application.student_details.personal[0].email;
+          obj.student_email = await application.student_details.personal[0]
+            .email;
           obj.student_id = await student._id;
           obj.status = await application.status;
           obj.student = await application.student_details;
-          obj.application_date=await application.application_date;
+          obj.application_date = await application.application_date;
         }
         return obj;
       })
@@ -1129,7 +1145,20 @@ app.post("/jobApplicantStatusChange", async (req, res) => {
         from: "r.patidar181001.2@gmail.com",
         to: student_email,
         subject: "Status Change",
-        text: `You got some changes in status of job you have applied , please login to our platform for check`,
+        text: ` <div style="background-color : #E8F5FF; width : max-content; padding : 2rem; content-align : center">
+        <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+          <div style="margin:1px 1px;width: max-content;padding:1rem 1rem">
+            <div style="border-bottom:1px solid #eee">
+              <a href="https://phd-portal-job.netlify.app/" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">PHD Job Portal</a>
+            </div>
+            <p>You have updates on your recent application. </p>
+            <p>
+              Please <a href="https://phd-portal-job.netlify.app/login?userType=student">login</a> at our portal to check it out.</p>
+            <p style="font-size:0.9em;">Regards,<br />Job Portal</p>
+            <hr style="border:none;border-top:1px solid #eee" />
+          </div>
+        </div>    
+              </div>`,
       };
 
       console.log("acceptd hai bahi");
@@ -1235,15 +1264,29 @@ function sendJobNotification(job) {
         from: process.env.USER_EMAIL,
         to: emailAddresses,
         subject: `New job posted: ${job.title}`,
-        text: `A new job has been posted in ${job.location}.`,
-        html: `<p>A new job has been posted in ${job.location}.</p>`,
+        html: `
+        <div style="background-color : #E8F5FF; width : max-content; padding : 2rem; content-align : center">
+  <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+    <div style="margin:1px 1px;width: max-content;padding:1rem 1rem">
+      <div style="border-bottom:1px solid #eee">
+        <a href="https://phd-portal-job.netlify.app/login?userType=student" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">PHD Job Portal</a>
+      </div>
+      <p>A new job has been posted for the role of <strong>${job.title}</strong></p>
+      <p><span style="margin-left : 1rem"></span>Location : <strong>${job.location}</strong></p>
+      <a href="https://phd-portal-job.netlify.app/login?userType=student">Login here</a>
+      <p style="font-size:0.9em;">Regards,<br />Job Portal</p>
+      <hr style="border:none;border-top:1px solid #eee" />
+    </div>
+  </div>
+</div>
+        `,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.error(error);
         } else {
-          console.log('Email sent: ' + info.response);
+          console.log("Email sent: " + info.response);
         }
       });
     }
@@ -1333,23 +1376,20 @@ app.post("/application-form/:job_id/:user_id", async (req, res) => {
   console.log("i got this data from the application form");
   console.log(obj);
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
 
-  today = yyyy + '-' + mm + '-' + dd;
+  today = yyyy + "-" + mm + "-" + dd;
 
   console.log(today);
-
-
-
 
   const new_application = new Application({
     student_id: user_id,
     job_id: job_id,
     status: "Pending",
     student_details: obj,
-    application_date:today,
+    application_date: today,
   });
 
   console.log("checking the new application");
@@ -1387,10 +1427,8 @@ app.get("/api/applicant-details/:id", async (req, res) => {
   }
 });
 
-
 // POST /api/comments
-app.post('/api/comments', async (req, res) => {
-
+app.post("/api/comments", async (req, res) => {
   console.log("inside backend after submit");
 
   const { text, user, jobPosting } = req.body;
@@ -1410,11 +1448,13 @@ app.post('/api/comments', async (req, res) => {
 });
 
 // GET /api/comments?jobPostingId=<jobPostingId>
-app.get('/api/getcomments', async (req, res) => {
+app.get("/api/getcomments", async (req, res) => {
   const { jobPostingId } = req.query;
   console.log("3");
   try {
-    const comments = await Comment.find({ jobPosting: jobPostingId }).populate('user');
+    const comments = await Comment.find({ jobPosting: jobPostingId }).populate(
+      "user"
+    );
     console.log(comments);
     res.json(comments);
   } catch (err) {
@@ -1423,14 +1463,14 @@ app.get('/api/getcomments', async (req, res) => {
 });
 
 // Get all institutes requests
-app.get('/api/getrequests', async (req, res) => {
+app.get("/api/getrequests", async (req, res) => {
   const requestss = await RegisterInstitute.find();
   res.json(requestss);
 });
 
 // get me ID
 
-app.get('/api/meid', auth, async (req, res) => {
+app.get("/api/meid", auth, async (req, res) => {
   const { _id } = req.user;
 
   res.json({ _id });
@@ -1449,21 +1489,20 @@ app.get('/api/meid', auth, async (req, res) => {
 });
 
 // Get all experiences
-app.get('/api/getexperiences', async (req, res) => {
+app.get("/api/getexperiences", async (req, res) => {
   const experiences = await Experience.find();
   res.json(experiences);
 });
 
 // Get all subscription status
-app.get('/api/getexperiences', async (req, res) => {
+app.get("/api/getexperiences", async (req, res) => {
   const experiences = await Experience.find();
   res.json(experiences);
 });
 
-app.get('/api/getsubscriptionstatus', auth, async (req, res) => {
-
+app.get("/api/getsubscriptionstatus", auth, async (req, res) => {
   const { _id } = req.user;
-  console.log()
+  console.log();
   const email = "";
 
   try {
@@ -1481,14 +1520,14 @@ app.get('/api/getsubscriptionstatus', auth, async (req, res) => {
 
         // If the user doesn't exist, return an error response
         if (!user) {
-          return res.status(404).json({ error: 'User not found' });
+          return res.status(404).json({ error: "User not found" });
         }
 
         // Otherwise, return the subscribedToJobAlerts value
         return res.json({ subscribedToJobAlerts: user.subscribedToJobAlerts });
       } catch (err) {
         console.error(err);
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: "Internal server error" });
       }
     }
   } catch (error) {
@@ -1496,9 +1535,8 @@ app.get('/api/getsubscriptionstatus', auth, async (req, res) => {
   }
 });
 
-
 // Create a new experience
-app.post('/api/createExperiences', async (req, res) => {
+app.post("/api/createExperiences", async (req, res) => {
   // console.log(req.body);
   const experience = new Experience(req.body);
   await experience.save();
@@ -1507,35 +1545,28 @@ app.post('/api/createExperiences', async (req, res) => {
 
 // get photo for experience section
 
-app.post('/api/getimage', async (req, res) => {
+app.post("/api/getimage", async (req, res) => {
   // console.log(req.body);
   const email = req.body.email;
   console.log(req.body);
   console.log(email);
 
-  if(!req.body)
-  {
-    return res.json({ status:200 , image :  "#" });
-  }
-  else
-  {
-
-    let user = await Personal.findOne({ email : email });
+  if (!req.body) {
+    return res.json({ status: 200, image: "#" });
+  } else {
+    let user = await Personal.findOne({ email: email });
 
     // console.log(user);
     // console.log(user.profile_image_url);
 
     let imagesrc = "#";
 
-    if(user.profile_image_url)
-    {
+    if (user.profile_image_url) {
       imagesrc = user.profile_image_url;
     }
 
-    return res.json({ status:200 , image :  imagesrc });
+    return res.json({ status: 200, image: imagesrc });
   }
-
-
 });
 
 // Add a comment to an experience
@@ -1562,11 +1593,14 @@ app.post("/api/addcomments/:id", async (req, res) => {
   });
 });
 
-
 // Update an experience
-app.put('/api/experiences/:id', async (req, res) => {
+app.put("/api/experiences/:id", async (req, res) => {
   console.log(" experiences");
-  const experience = await Experience.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  const experience = await Experience.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
   res.json(experience);
 });
 
@@ -1587,30 +1621,26 @@ app.put('/api/experiences/:id', async (req, res) => {
 // });
 
 // Get all comments for an experience
-app.get('/api/getcomments/:id', async (req, res) => {
+app.get("/api/getcomments/:id", async (req, res) => {
   console.log("get comments");
   try {
     const comments = await CommentNew.find({ experience: req.params.id })
-      .populate('experience', 'companyName')
-      .select('comment user createdAt');
+      .populate("experience", "companyName")
+      .select("comment user createdAt");
     res.json(comments);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 
-
-
-
-
 app.get("/custom-form-fields", (req, res) => {
-  const academicKeys = Object.keys(academicSchemaobj)
-  const experienceKeys = Object.keys(experienceSchemaobj)
-  const porKeys = Object.keys(porSchemaobj)
-  const publicationKeys = Object.keys(publicationSchemaobj)
-  const referenceKeys = Object.keys(referenceSchemaobj)
-  const personalKeys = Object.keys(personalSchemaobj)
+  const academicKeys = Object.keys(academicSchemaobj);
+  const experienceKeys = Object.keys(experienceSchemaobj);
+  const porKeys = Object.keys(porSchemaobj);
+  const publicationKeys = Object.keys(publicationSchemaobj);
+  const referenceKeys = Object.keys(referenceSchemaobj);
+  const personalKeys = Object.keys(personalSchemaobj);
   console.log(personalKeys);
   const obj = {};
   obj.academicKeys = academicKeys;
@@ -1620,43 +1650,49 @@ app.get("/custom-form-fields", (req, res) => {
   obj.referenceKeys = referenceKeys;
   obj.personalKeys = personalKeys;
 
-
   const personalData = {};
-  personalKeys.map(k => {
+  personalKeys.map((k) => {
     personalData[k] = false;
   });
   personalData["name"] = true;
   personalData["email"] = true;
 
   const academicData = {};
-  academicKeys.map(k => {
+  academicKeys.map((k) => {
     academicData[k] = false;
   });
 
   const experienceData = {};
-  experienceKeys.map(k => {
+  experienceKeys.map((k) => {
     experienceData[k] = false;
   });
 
   const porData = {};
-  porKeys.map(k => {
+  porKeys.map((k) => {
     porData[k] = false;
   });
 
   const referenceData = {};
-  referenceKeys.map(k => {
+  referenceKeys.map((k) => {
     referenceData[k] = false;
   });
 
   const publicationData = {};
-  publicationKeys.map(k => {
+  publicationKeys.map((k) => {
     publicationData[k] = false;
   });
 
-  res.send({ status: 200, obj: obj, personalData, academicData, experienceData, porData, referenceData, publicationData });
-
-})
-
+  res.send({
+    status: 200,
+    obj: obj,
+    personalData,
+    academicData,
+    experienceData,
+    porData,
+    referenceData,
+    publicationData,
+  });
+});
 
 app.post("/delete-job", async (req, res) => {
   console.log("hereregueiryg");
@@ -1670,11 +1706,14 @@ app.post("/delete-job", async (req, res) => {
     console.log("error deleting");
     res.send({ status: 500 });
   }
-})
+});
 
 app.post("/withdraw-application", async (req, res) => {
   const { id } = req.body;
-  const application = await Application.updateOne({ _id: id }, { $set: { status: "Withdrew" } });
+  const application = await Application.updateOne(
+    { _id: id },
+    { $set: { status: "Withdrew" } }
+  );
   if (application) {
     console.log("withdrew");
     res.send({ status: 200 });
@@ -1682,8 +1721,7 @@ app.post("/withdraw-application", async (req, res) => {
     console.log("error");
     res.send({ status: 500 });
   }
-})
-
+});
 
 app.post("/api/registerInstitute", async (req, res) => {
   // console.log("inside api");
@@ -1704,8 +1742,7 @@ app.post("/api/registerInstitute", async (req, res) => {
     companyName: companyName,
     location: location,
     year: year,
-    phone: phone
-
+    phone: phone,
   });
 
   console.log("chck ke pehle");
@@ -1716,29 +1753,31 @@ app.post("/api/registerInstitute", async (req, res) => {
     let check2 = await UserInstitute.find({ email: email });
     console.log(check1);
     console.log(check2);
-    if (check1.length !== 0 || check2.length!==0) {
+    if (check1.length !== 0 || check2.length !== 0) {
       console.log("inside check");
-      return res.status(200).send({ status: 400, message: "User already exists" });
-    }
-    else {
+      return res
+        .status(200)
+        .send({ status: 400, message: "User already exists" });
+    } else {
       const insti = new RegisterInstitute(newInstitute);
       insti.save((err) => {
         if (err) {
-          return res.status(500).send({ status: 500 , message: "Request Failed", err });
-
+          return res
+            .status(500)
+            .send({ status: 500, message: "Request Failed", err });
         } else {
-          return res.status(200).send({ status: 200 , message: "Request Succesfull"});
+          return res
+            .status(200)
+            .send({ status: 200, message: "Request Succesfull" });
         }
       });
     }
   } catch (error) {
     console.log(error);
-    return res.status(500).send({ status: 500 , message: "Request Failed"});
+    return res.status(500).send({ status: 500, message: "Request Failed" });
   }
 
   console.log("check ke baad ");
-
-
 });
 
 app.get("/updateJob/:id", async (req, res) => {
@@ -1749,28 +1788,31 @@ app.get("/updateJob/:id", async (req, res) => {
   } else {
     res.send({ status: 500 });
   }
-})
+});
 
 app.post("/updateJob", async (req, res) => {
   const { job, id } = req.body;
 
   const current_job = await Job.findOne({ _id: id });
   if (current_job) {
-    const new_job = await Job.updateOne({ _id: id }, {
-      $set: {
-        title: job.title,
-        description: job.description,
-        location: job.location,
-        salary: job.salary,
-        contactEmail: job.contactEmail,
-        qualifications: job.qualifications,
-        college: job.college,
-        responsibilities: job.responsibilities,
-        lastDate: job.lastDate,
-        lastUpdateDate: job.lastUpdateDate,
-        fields: job.fields
+    const new_job = await Job.updateOne(
+      { _id: id },
+      {
+        $set: {
+          title: job.title,
+          description: job.description,
+          location: job.location,
+          salary: job.salary,
+          contactEmail: job.contactEmail,
+          qualifications: job.qualifications,
+          college: job.college,
+          responsibilities: job.responsibilities,
+          lastDate: job.lastDate,
+          lastUpdateDate: job.lastUpdateDate,
+          fields: job.fields,
+        },
       }
-    });
+    );
 
     if (new_job) {
       res.send({ status: 200 });
@@ -1778,16 +1820,11 @@ app.post("/updateJob", async (req, res) => {
       res.send({ status: 500 });
     }
   } else {
-    res.send({ status: 500 })
+    res.send({ status: 500 });
   }
-})
+});
 
-
-
-const createWorkbook = async (id) => {
-
-};
-
+const createWorkbook = async (id) => {};
 
 app.get("/create-workbook/:id", async (req, res) => {
   const { id } = req.params;
@@ -1826,17 +1863,17 @@ app.get("/create-workbook/:id", async (req, res) => {
     });
     console.log("done till here");
     await wb.write(name_of_file);
-
   }
   res.send({ status: 200 });
-})
+});
 app.get("/export/:id", async (req, res, next) => {
   console.log("here");
   const { id } = req.params;
   const application = await Application.findOne({ _id: id });
   console.log(application);
   //await createWorkbook(id);
-  var name_of_file = application.student_details.personal[0].name + "_applicant_details.xlsx";
+  var name_of_file =
+    application.student_details.personal[0].name + "_applicant_details.xlsx";
   const file = __dirname + `\\${name_of_file}`;
   const fileName = path.basename(file);
   const mimeType = mime.getType(file);
@@ -1845,13 +1882,9 @@ app.get("/export/:id", async (req, res, next) => {
   console.log("here too");
   res.download(file, name_of_file);
 
-
-
   console.log("and afetr");
-  console.log('rwugteiu');
-
-
-})
+  console.log("rwugteiu");
+});
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port 4000");
