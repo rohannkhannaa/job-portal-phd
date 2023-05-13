@@ -323,10 +323,10 @@ export default function Profile({ user, type }) {
                   <>
                     <button
                     style={{
-                      border : '1px solid grey',
-                      width : '100%',
+                      border : '1px solid #ecdede',
+                      width : '90%',
                       margin : '0',
-                      padding : '0.2rem',
+                      padding : '0.7rem',
                       marginTop : '1rem',
                     }}
                       onClick={() => {
@@ -574,8 +574,8 @@ export default function Profile({ user, type }) {
                   <>
                     <button
                     style={{
-                      border : '1px solid grey',
-                      width : '100%',
+                      border : '1px solid #ecdede',
+                      width : '90%',
                       margin : '0',
                       padding : '0.7rem',
                       marginTop : '1rem',
