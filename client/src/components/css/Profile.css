@@ -150,8 +150,3 @@ p {
   background-color: white !important;
   color : black !important;
 }
-@media (max-width: 767px) {
-  .outer-container {
-    position: static;
-  }
-}
