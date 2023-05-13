@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import ImageUploader from "./ImageUploader";
 export default function Profile({ user, type }) {
   const [isEdit2, setIsEdit2] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
@@ -127,7 +128,7 @@ export default function Profile({ user, type }) {
         });
       }
     });
-  }, [isEdit2, isEditMode]);
+  }, [isEdit2, isEditMode, refreshKey]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -138,10 +139,7 @@ export default function Profile({ user, type }) {
   };
 
   const handleSubmit = (event) => {
-    setIsEditMode(true);
-    setIsEdit2(true);
-    setIsEditMode(false);
-    setIsEdit2(false);
+    setRefreshKey(true);
     // save into database
     axios.post("/personal", { formValues, user }).then((response) => {
       if (response.data.status === 200) {
