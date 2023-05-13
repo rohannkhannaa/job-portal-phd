@@ -28,7 +28,7 @@ import axios from "./axios";
 //   return data.name;
 // }
 export default function Profile({ user, type }) {
-  const [renderSideNav, setRenderSideNav] = useState(true);
+  const [renderSideNav, setRenderSideNav] = useState(false);
   const [altProfile, setAltProfile] = useState(defaultImage);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -319,11 +319,16 @@ export default function Profile({ user, type }) {
                 {renderSideNav ? (
                   <>
                     <button
+                    style={{
+                      width : '100%',
+                      margin : '0',
+                      padding : '0.2rem',
+                    }}
                       onClick={() => {
-                        setRenderSideNav(true);
+                        setRenderSideNav(false);
                       }}
                     >
-                      Show more
+                      Hide
                     </button>
 
                     <div className="outer-container">
@@ -563,11 +568,16 @@ export default function Profile({ user, type }) {
                 ) : (
                   <>
                     <button
+                    style={{
+                      width : '100%',
+                      margin : '0',
+                      padding : '0.2rem',
+                    }}
                       onClick={() => {
-                        setRenderSideNav(false);
+                        setRenderSideNav(true);
                       }}
                     >
-                      Hide
+                      Show more
                     </button>
                   </>
                 )}
