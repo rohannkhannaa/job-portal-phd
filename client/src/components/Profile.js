@@ -326,6 +326,7 @@ export default function Profile({ user, type }) {
                       width : '100%',
                       margin : '0',
                       padding : '0.2rem',
+                      marginTop : '1rem',
                     }}
                       onClick={() => {
                         setRenderSideNav(false);
@@ -575,6 +576,7 @@ export default function Profile({ user, type }) {
                       width : '100%',
                       margin : '0',
                       padding : '0.2rem',
+                      marginTop : '1rem',
                     }}
                       onClick={() => {
                         setRenderSideNav(true);
