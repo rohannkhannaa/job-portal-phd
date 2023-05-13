@@ -80,6 +80,7 @@ function JobApplicantCard({student_name,student_email,status,application_id,id,s
                 headers: {},
                 })
                 .then((res) => {
+                  console.log("Here");
                     const url = window.URL.createObjectURL(new Blob([res.data]));
                     const link = document.createElement('a');
                     link.href = url;
@@ -90,8 +91,7 @@ function JobApplicantCard({student_name,student_email,status,application_id,id,s
                 .catch((error) => {
                     alert(error);
                 })
-          },2000);
-
+          },4000);
         }
       }).catch((err)=> console.log(err));
   }
