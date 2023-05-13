@@ -193,7 +193,7 @@ export default function Profile({ user, type }) {
                     style={{ paddingBottom: "0" }}
                   >
                     <nav>
-                      <Popup
+                      {/* <Popup
                         trigger={
                           <button className="flex items-center px-7 py-2 navButton">
                             Parse Resume
@@ -225,7 +225,7 @@ export default function Profile({ user, type }) {
                             />
                           </>
                         )}
-                      </Popup>
+                      </Popup> */}
                       <button
                         style={{ color: "red !important" }}
                         className={
@@ -345,7 +345,7 @@ export default function Profile({ user, type }) {
                                 position: "relative",
                                 display: "inline-block",
                                 // opacity: isHovered ? 0.4 : 1,
-                                marginLeft: "1rem",
+                                // marginLeft: "1rem",
                               }}
                               onMouseEnter={handleMouseEnter}
                               onMouseLeave={handleMouseLeave}
@@ -359,7 +359,6 @@ export default function Profile({ user, type }) {
                                   width: "200px",
                                   height: "200px",
                                   borderRadius: "50%",
-                                  marginLeft: "2rem",
                                   padding: "0",
                                   margin: "0",
                                   marginBottom: "1rem",
@@ -381,7 +380,7 @@ export default function Profile({ user, type }) {
                                         padding: "5px",
                                         zIndex: "1rem",
                                         borderRadius: "5rem",
-                                        width: "4rem",
+                                        width: "100%",
                                       }}
                                       onClick={() => setPopUpImageForm(true)}
                                     >
@@ -437,7 +436,7 @@ export default function Profile({ user, type }) {
                           style={{ paddingBottom: "0" }}
                         >
                           <nav>
-                            <Popup
+                            {/* <Popup
                               trigger={
                                 <button className="flex items-center px-7 py-2 navButton">
                                   Parse Resume
@@ -469,9 +468,11 @@ export default function Profile({ user, type }) {
                                   />
                                 </>
                               )}
-                            </Popup>
+                            </Popup> */}
                             <button
-                              style={{ color: "red !important" }}
+                              style={{
+                                margin : isMobile ? 'auto' : ''
+                              }}
                               className={
                                 activeComponent === "personal"
                                   ? "flex items-center px-1 py-2 active"
@@ -486,6 +487,9 @@ export default function Profile({ user, type }) {
                               </span>
                             </button>
                             <button
+                            style={{
+                              margin : isMobile ? 'auto' : ''
+                            }}
                               className={
                                 activeComponent === "academic"
                                   ? "flex items-center px-1 py-2 active"
@@ -500,6 +504,9 @@ export default function Profile({ user, type }) {
                               </span>
                             </button>
                             <button
+                            style={{
+                              margin : isMobile ? 'auto' : ''
+                            }}
                               className={
                                 activeComponent === "experience"
                                   ? "flex items-center px-1 py-2 active"
@@ -514,6 +521,9 @@ export default function Profile({ user, type }) {
                               </span>
                             </button>
                             <button
+                            style={{
+                              margin : isMobile ? 'auto' : ''
+                            }}
                               className={
                                 activeComponent === "publication"
                                   ? "flex items-center px-1 py-2 active"
@@ -526,6 +536,9 @@ export default function Profile({ user, type }) {
                               <span class="mx-4 font-medium">Publications</span>
                             </button>
                             <button
+                            style={{
+                              margin : isMobile ? 'auto' : ''
+                            }}
                               className={
                                 activeComponent === "references"
                                   ? "flex items-center px-1 py-2 active"
@@ -538,6 +551,9 @@ export default function Profile({ user, type }) {
                               <span class="mx-4 font-medium">References</span>
                             </button>
                             <button
+                            style={{
+                              margin : isMobile ? 'auto' : ''
+                            }}
                               className={
                                 activeComponent === "por"
                                   ? "flex items-center px-1 py-2 active"
@@ -552,6 +568,9 @@ export default function Profile({ user, type }) {
                               </span>
                             </button>
                             <button
+                            style={{
+                              margin : isMobile ? 'auto' : ''
+                            }}
                               className={
                                 activeComponent === "doc"
                                   ? "flex items-center px-1 py-2 active"
@@ -575,10 +594,10 @@ export default function Profile({ user, type }) {
                     <button
                     style={{
                       border : '1px solid #ecdede',
-                      width : '90%',
+                      width : '100%',
                       margin : '0',
                       padding : '0.7rem',
-                      marginTop : '1rem',
+                      marginTop : '2rem',
                     }}
                       onClick={() => {
                         setRenderSideNav(true);
