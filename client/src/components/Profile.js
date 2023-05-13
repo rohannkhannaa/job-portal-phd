@@ -28,7 +28,7 @@ import axios from "./axios";
 //   return data.name;
 // }
 export default function Profile({ user, type }) {
-  const [renderSideNav, setRenderSideNav] = useState(false);
+  const [renderSideNav, setRenderSideNav] = useState(true);
   const [altProfile, setAltProfile] = useState(defaultImage);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
