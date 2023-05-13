@@ -356,19 +356,10 @@ function ApplicantDetails({ user, type }) {
                             class="px-4 py-3 text-sm text-gray-500 dark:text-gray-300 whitespace-normal"
                             style={{ display: "block", borderLeftWidth: "1px" }}
                           >
-                            {resume ? (
-                              <>
                                 <a href={resume} download>
                                   Download PDF
                                 </a>
 
-                                {/* <button onClick={openPDF}>Open PDF</button> */}
-                              </>
-                            ) : (
-                              <>
-                              Not uploaded by student
-                              </>
-                            )}
                           </td>
                         </tr>
                         <tr>
