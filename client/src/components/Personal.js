@@ -138,9 +138,8 @@ export default function Profile({ user, type }) {
   };
 
   const handleSubmit = (event) => {
-    setIsEditMode(false);
-    setIsEdit2(false);
-    event.preventDefault();
+    setIsEditMode(true);
+    setIsEdit2(true);
     setIsEditMode(false);
     setIsEdit2(false);
     // save into database
