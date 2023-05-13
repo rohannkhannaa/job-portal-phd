@@ -348,9 +348,7 @@ function JobApplicants({ user, type }) {
                     <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Status</th>
                     <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"><CSVLink {...csvLink}>Download All</CSVLink></th>
 
-                    <th scope="col" className="relative py-3.5 px-4">
-                      <span className="sr-only">View Applicant Detail</span>
-                    </th>
+                    
                     <th scope="col" className="relative py-3.5 px-4">
                     <div className="flex items-center gap-x-12">
                         <button onClick={handleShowAccept} className="text-gray-500 transition-colors duration-200 dark:hover:text-emerald-500 dark:text-gray-300 hover:text-emerald-500 focus:outline-none">

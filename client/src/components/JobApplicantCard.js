@@ -69,6 +69,7 @@ function JobApplicantCard({student_name,student_email,status,application_id,id,s
         console.log(res.data);
         if(res.data.status===200){
           //handleDownload();
+          
           setTimeout(()=>{
             console.log("workbook created");
             console.log("here");
