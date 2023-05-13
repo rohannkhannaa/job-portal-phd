@@ -181,6 +181,7 @@ function FileUpload({ user, type }) {
             <br></br>
             {mainResume ? (
               <>
+              <p style={{color : '#198754'}}> Your resume has been uploaded !</p>
                 <a style={{
                   color: "#3b32b3",
                   border: "1px solid #3b32b3",
@@ -194,11 +195,13 @@ function FileUpload({ user, type }) {
                 </a>
               </>
             ) : (
-              <></>
+              <>
+                <p style={{color : '#B54141'}}> No reume has been uploaded yet !</p>
+              </>
             )}
           </form>
         </div>
-        {mainResume === "#" || mainResume === null ? (
+        {mainResume === "#" || mainResume === null || isMobile || !isMobile ? (
           <></>
         ) : (
           <>
