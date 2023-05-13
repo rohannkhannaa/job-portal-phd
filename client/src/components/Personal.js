@@ -138,10 +138,16 @@ export default function Profile({ user, type }) {
   };
 
   const handleSubmit = (event) => {
+    setIsEditMode(false);
+    setIsEdit2(false);
     event.preventDefault();
+    setIsEditMode(false);
+    setIsEdit2(false);
     // save into database
     axios.post("/personal", { formValues, user }).then((response) => {
       if (response.data.status === 200) {
+        setIsEditMode(false);
+        setIsEdit2(false);
         console.log("Your data was saved");
       } else {
         alert("Please try again later!");
