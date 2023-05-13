@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "./axios";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 import { FaTrash } from "react-icons/fa";
 
 function FileUpload({ user, type }) {
@@ -201,7 +203,7 @@ function FileUpload({ user, type }) {
             )}
           </form>
         </div>
-        {mainResume === "#" || mainResume === null || isMobile || !isMobile ? (
+        {mainResume === "#" || mainResume === null? (
           <></>
         ) : (
           <>
