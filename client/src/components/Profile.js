@@ -333,7 +333,7 @@ export default function Profile({ user, type }) {
                         setRenderSideNav(false);
                       }}
                     >
-                      Hide 
+                      Hide 🔼
                     </button>
 
                     <div className="outer-container">
