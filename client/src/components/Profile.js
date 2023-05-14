@@ -86,8 +86,6 @@ export default function Profile({ user, type }) {
   });
 
   return (
-    <>
-      {/* {screenWidth >= 1024 ? ( */}
       <>
         {type === "student" ? (
           <div style={{ display: isMobile ? "" : "flex" }}>
@@ -568,9 +566,6 @@ export default function Profile({ user, type }) {
         ) : (
           <>{/* INSTITUE PROFILE NAVBAR */}</>
         )}
-      </>
-      ) : (<>{/* INSTITUTE PROFILE SECTION */}</>
-      {/* )} */}
-    </>
+      </> 
   );
 }
