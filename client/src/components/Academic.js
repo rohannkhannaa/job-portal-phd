@@ -381,7 +381,7 @@ export default function Profile({ user, type }) {
               </>
             ) : (
               <>
-                <div style={{ width: "80%" }} className="flex my-10 mx-20">
+                <div style={{ width: "90%" }} className="flex my-10 mx-20">
                   <div className="my-2 flex-1 bg-white shadow overflow-hidden sm:rounded-lg">
                     <div className="flex space-x-3 px-4 py-5 sm:px-6">
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
