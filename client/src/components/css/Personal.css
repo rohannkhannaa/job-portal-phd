@@ -1,7 +1,6 @@
 .userProfile {
-  margin-left: 5rem;
-  padding: 20px;
-  padding-right: 4rem;
+  margin: 0;
+  padding-right: 5rem;
   /* border-right: 1px solid black; */
   height : max-content ;
 }
