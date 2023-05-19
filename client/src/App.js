@@ -1,5 +1,7 @@
 import { useEffect, useContext, useState} from "react";
 import {BrowserRouter,Routes,Route,useNavigate,Navigate} from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
+
 // import { Parser } from "json2csv";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
@@ -93,6 +95,13 @@ function Root() {
 
   return (
     <div>
+      {!hasRecievedData ? (<>
+        <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+      </>) : (<>
+
+      </>)}
       {hasRecievedData && <Routes>
 
 
