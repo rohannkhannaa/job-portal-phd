@@ -103,7 +103,7 @@ function Root() {
     <div>
       {!hasRecievedData ? (
         <>
-          <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+          <div style={{display: "flex", justifyContent: 'center',alignItems: 'center', height: '100vh'}}>
             <Spinner animation="border" role="status">
               <span className="visually-hidden">Loading...</span>
             </Spinner>
